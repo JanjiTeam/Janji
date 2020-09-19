@@ -1,0 +1,12 @@
+knpu_oauth2_client:
+    clients:
+        auth0_main:
+            type: auth0
+            client_id: '%env(AUTH0_CLIENT_ID)%'
+            client_secret: '%env(AUTH0_CLIENT_SECRET)%'
+            # the route that you're redirected to after
+            # see the controller example below
+            redirect_route: connect_auth0_check
+            redirect_params: {}
+            account: '%env(AUTH0_ACCOUNT_NAME)%'
+            region: 'eu'
