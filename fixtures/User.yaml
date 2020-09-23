@@ -1,0 +1,16 @@
+App\Entity\User:
+    user_admin:
+        email: <email()>
+        roles:
+            - ROLE_ADMIN
+        enabled: true
+    user_pro:
+        email: <email()>
+        roles:
+            - ROLE_PRO
+        enabled: true
+    user_auth0:
+        email: <email()>
+        roles:
+            - ROLE_AUTH0
+        enabled: true

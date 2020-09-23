@@ -1,0 +1,3 @@
+App\Entity\Calendar:
+    calendar:
+        owner: '@user_pro'

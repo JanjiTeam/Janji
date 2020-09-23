@@ -3,7 +3,8 @@ install:
 database:
 	php bin/console doctrine:database:create --if-not-exists --no-interaction
 	php bin/console doctrine:migration:migrate --no-interaction
-
+fixtures:
+	php bin/console hautelook:fixtures:load
 test:
 	php bin/phpunit
 cs-check:
