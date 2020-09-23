@@ -38,9 +38,6 @@ jobs:
                 if: steps.composer-cache.outputs.cache-hit != 'true'
                 run: make install
 
-            -   name: Check Symfony requirements
-                run: vendor/bin/requirements-checker
-
             -   name: Check the Symfony console
                 run: php bin/console -V
 
