@@ -15,23 +15,23 @@ class Slot
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $start;
+    private \DateTimeImmutable $start;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $end;
+    private \DateTimeImmutable $end;
 
     /**
      * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="slots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $calendar;
+    private ?Calendar $calendar;
 
     public function getId(): ?int
     {

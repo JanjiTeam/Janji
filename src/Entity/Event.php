@@ -15,29 +15,29 @@ class Event
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $start;
+    private \DateTimeImmutable $start;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $end;
+    private \DateTimeImmutable $end;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private ?User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $calendar;
+    private ?Calendar $calendar;
 
     public function getId(): ?int
     {

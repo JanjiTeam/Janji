@@ -17,23 +17,23 @@ class Calendar
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="calendars")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $owner;
+    private ?User $owner;
 
     /**
      * @ORM\OneToMany(targetEntity=Slot::class, mappedBy="calendar", orphanRemoval=true)
      */
-    private $slots;
+    private Collection $slots;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="calendar")
      */
-    private $events;
+    private Collection $events;
 
     public function __construct()
     {
