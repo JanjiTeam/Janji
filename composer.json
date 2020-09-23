@@ -1,4 +1,6 @@
 {
+    "name": "JanjiTeam/Janji",
+    "description": "A simple appointments scheduling application",
     "type": "project",
     "license": "proprietary",
     "require": {
