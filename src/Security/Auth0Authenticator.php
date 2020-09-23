@@ -15,19 +15,12 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class Auth0Authenticator extends SocialAuthenticator
 {
-
-    /**
-     * @var ClientRegistry
-     */
     private ClientRegistry $clientRegistry;
-    /**
-     * @var EntityManagerInterface
-     */
+
     private EntityManagerInterface $entityManager;
 
     public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $entityManager)
     {
-
         $this->clientRegistry = $clientRegistry;
         $this->entityManager = $entityManager;
     }
@@ -51,7 +44,7 @@ class Auth0Authenticator extends SocialAuthenticator
 
         $client = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
-        if($client) {
+        if ($client) {
             return $client;
         }
 
@@ -67,7 +60,7 @@ class Auth0Authenticator extends SocialAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         return new JsonResponse([
-            'error' => $exception->getMessageKey()
+            'error' => $exception->getMessageKey(),
         ], 401);
     }
 
@@ -79,7 +72,7 @@ class Auth0Authenticator extends SocialAuthenticator
     public function start(Request $request, AuthenticationException $authException = null)
     {
         return new JsonResponse([
-            'error' => 'Access Denied'
+            'error' => 'Access Denied',
         ], 401);
     }
 

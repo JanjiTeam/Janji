@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class Auth0Controller extends AbstractController
 {
     /**
-     * Link to this controller to start the "connect" process
+     * Link to this controller to start the "connect" process.
      *
      * @Route("/connect/auth0", name="connect_auth0_start")
      */
@@ -26,6 +26,5 @@ class Auth0Controller extends AbstractController
      */
     public function connectCheckAction()
     {
-
     }
 }
