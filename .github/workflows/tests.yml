@@ -43,15 +43,15 @@ jobs:
 
             -   name: Install dependencies
                 if: steps.composer-cache.outputs.cache-hit != 'true'
-                run: make install
+                run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
             -   name: Check the Symfony console
                 run: php bin/console -V
 
             -   name: Run unit tests
-                run: make test
+                run: php bin/phpunit
 
             -   name: Run CS
                 run: |
-                    make cs
-                    make cs-check
+                    phpcs --standard=phpcs.xml.dist -n -p
+                    php-cs-fixer fix --dry-run --using-cache=no --verbose --diff
