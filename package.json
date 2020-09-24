@@ -10,6 +10,9 @@
         "postcss": "^8.0.5",
         "postcss-loader": "^4.0.2",
         "regenerator-runtime": "^0.13.2",
+        "stylelint": "^13.7.1",
+        "stylelint-config-standard": "^20.0.0",
+        "stylelint-webpack-plugin": "^2.1.0",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -20,7 +23,9 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress",
         "js-lint": "eslint assets",
-        "js-lint-fix": "eslint assets --fix"
+        "js-lint-fix": "eslint assets --fix",
+        "css-lint": "stylelint \"assets/css/**/*.css\"",
+        "css-lint-fix": "stylelint \"assets/css/**/*.css\" --fix"
     },
     "browserslist": [
         "defaults"

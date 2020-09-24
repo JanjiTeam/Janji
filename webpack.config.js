@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -31,6 +32,12 @@ Encore
     /* eslint-enable no-param-reassign */
 
     .enablePostCssLoader()
-    .enableEslintLoader();
+    .enableEslintLoader()
+    .addPlugin(new StylelintPlugin({
+        configFile: '.stylelintrc.json',
+        context: 'assets/css',
+        files: '**/*.css',
+        failOnError: Encore.isProduction(),
+    }));
 
 module.exports = Encore.getWebpackConfig();
