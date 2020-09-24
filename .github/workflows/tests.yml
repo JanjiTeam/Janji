@@ -29,6 +29,11 @@ jobs:
                 env:
                     update: true
 
+            -   name: Use Node.js
+                uses: actions/setup-node@v1
+                with:
+                    node-version: '12.x'
+
             -   name: Validate composer.json and composer.lock
                 run: composer validate
 
@@ -41,17 +46,32 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-
 
-            -   name: Install dependencies
+            -   name: Install composer dependencies
                 if: steps.composer-cache.outputs.cache-hit != 'true'
                 run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+
+            -   name: Cache Node.js modules
+                uses: actions/cache@v2
+                with:
+                    path: ~/.npm
+                    key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+                    restore-keys: |
+                        ${{ runner.OS }}-node-
+                        ${{ runner.OS }}-
+
+            -   name: Install npm dependencies
+                run: npm ci
 
             -   name: Check the Symfony console
                 run: php bin/console -V
 
-            -   name: Run unit tests
+            -   name: Run PHP unit tests
                 run: php bin/phpunit
 
-            -   name: Run CS
+            -   name: Run PHP CS
                 run: |
                     phpcs --standard=phpcs.xml.dist -n -p
                     php-cs-fixer fix --dry-run --using-cache=no --verbose --diff
+
+            -   name: Run Eslint
+                run: npm run js-lint
