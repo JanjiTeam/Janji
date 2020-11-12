@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -14,22 +15,24 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"get_events"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"get_events"})
      */
     private \DateTimeImmutable $start;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"get_events"})
      */
     private \DateTimeImmutable $end;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
-     * @ORM\JoinColumn(nullable=false)
      */
     private ?User $user;
 
@@ -37,14 +40,14 @@ class Event
      * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Calendar $calendar;
+    private Calendar $calendar;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getStart(): ?\DateTimeImmutable
+    public function getStart(): \DateTimeImmutable
     {
         return $this->start;
     }
@@ -80,12 +83,12 @@ class Event
         return $this;
     }
 
-    public function getCalendar(): ?Calendar
+    public function getCalendar(): Calendar
     {
         return $this->calendar;
     }
 
-    public function setCalendar(?Calendar $calendar): self
+    public function setCalendar(Calendar $calendar): self
     {
         $this->calendar = $calendar;
 

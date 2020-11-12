@@ -71,6 +71,11 @@ class User implements UserInterface
         $this->events = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->email;
+    }
+
     public function getId(): int
     {
         return $this->id;

@@ -19,32 +19,20 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    // /**
-    //  * @return Event[] Returns an array of Event objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findCalendarEventsByPeriod($calendarId, $start = null, $end = null)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('e')
+            ->join('e.calendar', 'c')
+            ->andWhere('c.id = :cid')
+            ->setParameter('cid', $calendarId);
 
-    /*
-    public function findOneBySomeField($value): ?Event
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if($start && $end) {
+            $qb->andWhere('e.start >= :start')
+                ->setParameter('start', $start);
+            $qb->andWhere('e.end <= :end')
+                ->setParameter('end', $end);
+        }
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }

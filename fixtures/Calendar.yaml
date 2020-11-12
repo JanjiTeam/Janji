@@ -1,3 +1,4 @@
 App\Entity\Calendar:
     calendar:
+        title: <text(255)>
         owner: '@user_pro'

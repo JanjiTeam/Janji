@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Calendar{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('calendar') }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ calendar.title }}</h1>
+
+    <div class="container">
+        <div id="calendar"></div>
+    </div>
+
+    <a href="{{ path('calendar_index') }}">back to list</a>
+
+    {{ include('calendar/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        const calendarId = {{ calendar.id }};
+    </script>
+
+    {{ encore_entry_script_tags('calendar') }}
+{% endblock %}

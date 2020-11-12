@@ -11,6 +11,7 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .addEntry('app', './assets/js/app.js')
+    .addEntry('calendar', './assets/js/calendar.js')
 
     .copyFiles({
         from: './assets/images',

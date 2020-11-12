@@ -20,6 +20,11 @@ class Calendar
     private int $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $title;
+
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="calendars")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -31,7 +36,7 @@ class Calendar
     private Collection $slots;
 
     /**
-     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="calendar")
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="calendar", cascade={"persist"})
      */
     private Collection $events;
 
@@ -116,6 +121,18 @@ class Calendar
                 $event->setCalendar(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

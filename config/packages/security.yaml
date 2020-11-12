@@ -20,9 +20,9 @@ security:
             provider: app_user_provider
             guard:
                 authenticators:
-                    - App\Security\AdminAuthenticator
                     - App\Security\Auth0Authenticator
-                entry_point: App\Security\Auth0Authenticator
+                    - App\Security\FormAuthenticator
+                entry_point: App\Security\FormAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
