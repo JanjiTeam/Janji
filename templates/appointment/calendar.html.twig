@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AppointmentController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('appointment') }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        <div id="calendar"></div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        const calendarId = {{ calendar.id }};
+    </script>
+
+    {{ encore_entry_script_tags('appointment') }}
+{% endblock %}

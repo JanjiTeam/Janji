@@ -17,12 +17,12 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/calendar")
- * @IsGranted("ROLE_PRO")
  */
 class CalendarController extends AbstractController
 {
     /**
      * @Route("/", name="calendar_index", methods={"GET"})
+     * @IsGranted("ROLE_PRO")
      */
     public function index(CalendarRepository $calendarRepository): Response
     {
@@ -35,6 +35,7 @@ class CalendarController extends AbstractController
 
     /**
      * @Route("/new", name="calendar_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_PRO")
      */
     public function new(Request $request): Response
     {
@@ -61,6 +62,7 @@ class CalendarController extends AbstractController
 
     /**
      * @Route("/{id}", name="calendar_show", methods={"GET","POST"})
+     * @IsGranted("ROLE_PRO")
      */
     public function edit(Request $request, Calendar $calendar): Response
     {
@@ -83,6 +85,7 @@ class CalendarController extends AbstractController
 
     /**
      * @Route("/{id}", name="calendar_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_PRO")
      */
     public function delete(Request $request, Calendar $calendar): Response
     {
@@ -123,6 +126,7 @@ class CalendarController extends AbstractController
 
     /**
      * @Route("/{id}/events", name="add_calendar_events", methods={"POST"})
+     * @IsGranted("ROLE_PRO")
      */
     public function addCalendarEvents(Request $request, Calendar $calendar, SerializerInterface $serializer): JsonResponse
     {

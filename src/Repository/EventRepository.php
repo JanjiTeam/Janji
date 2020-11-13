@@ -26,9 +26,11 @@ class EventRepository extends ServiceEntityRepository
             ->andWhere('c.id = :cid')
             ->setParameter('cid', $calendarId);
 
-        if($start && $end) {
+        if ($start) {
             $qb->andWhere('e.start >= :start')
                 ->setParameter('start', $start);
+        }
+        if ($end) {
             $qb->andWhere('e.end <= :end')
                 ->setParameter('end', $end);
         }
