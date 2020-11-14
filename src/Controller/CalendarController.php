@@ -105,6 +105,7 @@ class CalendarController extends AbstractController
     {
         $start = $request->query->get('start');
         $end = $request->query->get('end');
+        $free = (bool) $request->query->get('free', false);
 
         $startDate = null;
         $endDate = null;
@@ -117,7 +118,7 @@ class CalendarController extends AbstractController
             $endDate = new \DateTimeImmutable($end);
         }
 
-        $events = $this->getDoctrine()->getRepository(Event::class)->findCalendarEventsByPeriod($calendar->getId(), $startDate, $endDate);
+        $events = $this->getDoctrine()->getRepository(Event::class)->findCalendarEventsByPeriod($calendar->getId(), $startDate, $endDate, $free);
 
         $json = $serializer->serialize($events, 'json', ['groups' => 'get_events']);
 

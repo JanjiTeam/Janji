@@ -19,7 +19,7 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function findCalendarEventsByPeriod($calendarId, $start = null, $end = null)
+    public function findCalendarEventsByPeriod($calendarId, $start = null, $end = null, $free = false)
     {
         $qb = $this->createQueryBuilder('e')
             ->join('e.calendar', 'c')
@@ -33,6 +33,11 @@ class EventRepository extends ServiceEntityRepository
         if ($end) {
             $qb->andWhere('e.end <= :end')
                 ->setParameter('end', $end);
+        }
+
+        if ($free) {
+            $qb->leftJoin('e.user', 'u')
+                ->andWhere('u.id IS NULL');
         }
 
         return $qb->getQuery()->getResult();

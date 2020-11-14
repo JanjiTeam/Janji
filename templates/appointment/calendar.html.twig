@@ -10,6 +10,15 @@
 {% block body %}
     <div>
         <div id="calendar"></div>
+        <aside>
+            <h3>Votre rendez vous : </h3>
+            <div>
+                <p id="appointment-display"></p>
+            </div>
+            {{ form_start(appointmentForm) }}
+                <button type="submit">Confirmer</button>
+            {{ form_end(appointmentForm) }}
+        </aside>
     </div>
 {% endblock %}
 
