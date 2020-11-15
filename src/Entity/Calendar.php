@@ -31,18 +31,12 @@ class Calendar
     private ?User $owner;
 
     /**
-     * @ORM\OneToMany(targetEntity=Slot::class, mappedBy="calendar", orphanRemoval=true)
-     */
-    private Collection $slots;
-
-    /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="calendar", cascade={"persist"})
      */
     private Collection $events;
 
     public function __construct()
     {
-        $this->slots = new ArrayCollection();
         $this->events = new ArrayCollection();
     }
 
@@ -59,37 +53,6 @@ class Calendar
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Slot[]
-     */
-    public function getSlots(): Collection
-    {
-        return $this->slots;
-    }
-
-    public function addSlot(Slot $slot): self
-    {
-        if (!$this->slots->contains($slot)) {
-            $this->slots[] = $slot;
-            $slot->setCalendar($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSlot(Slot $slot): self
-    {
-        if ($this->slots->contains($slot)) {
-            $this->slots->removeElement($slot);
-            // set the owning side to null (unless already changed)
-            if ($slot->getCalendar() === $this) {
-                $slot->setCalendar(null);
-            }
-        }
 
         return $this;
     }

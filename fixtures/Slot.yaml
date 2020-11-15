@@ -1,5 +1,0 @@
-App\Entity\Slot:
-    slot_{1..3}:
-        start: <immutableDateTimeBetween("-7 days")>
-        end: <immutableDateTimeBetween($start, "now")>
-        calendar: '@calendar'
