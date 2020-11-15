@@ -34,3 +34,5 @@ yarn-error.log
 /.php_cs
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
+cghooks.lock
+

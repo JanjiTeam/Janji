@@ -46,8 +46,10 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5",
+        "brainmaestro/composer-git-hooks": "^2.8",
         "friendsofphp/php-cs-fixer": "^2.16",
+        "hautelook/alice-bundle": "^2.6",
+        "phpunit/phpunit": "^7.5",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/browser-kit": "^5.1",
         "symfony/css-selector": "^5.1",
@@ -56,8 +58,7 @@
         "symfony/phpunit-bridge": "^5.1",
         "symfony/stopwatch": "^5.1",
         "symfony/var-dumper": "^5.1",
-        "symfony/web-profiler-bundle": "^5.1",
-        "hautelook/alice-bundle": "^2.6"
+        "symfony/web-profiler-bundle": "^5.1"
     },
     "config": {
         "optimize-autoloader": true,
@@ -91,10 +92,12 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "cghooks add --ignore-lock"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "cghooks update"
         ]
     },
     "conflict": {
@@ -104,6 +107,12 @@
         "symfony": {
             "allow-contrib": false,
             "require": "5.1.*"
+        },
+        "hooks": {
+            "pre-commit": [
+                "echo committing as $(git config user.name)",
+                "./vendor/bin/php-cs-fixer fix"
+            ]
         }
     }
 }
