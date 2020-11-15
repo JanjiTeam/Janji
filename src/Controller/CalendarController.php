@@ -56,7 +56,7 @@ class CalendarController extends AbstractController
         }
 
         return $this->render('calendar/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 

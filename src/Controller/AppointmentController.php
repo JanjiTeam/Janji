@@ -68,6 +68,7 @@ class AppointmentController extends AbstractController
             if ($event && $event->getUser() === null) {
                 $event->setUser($this->getUser());
                 $this->getDoctrine()->getManager()->flush();
+
                 return $this->redirectToRoute('appointment_confirmation');
             }
         }

@@ -15,11 +15,11 @@ class EventType extends AbstractType
         $builder
             ->add('start', DateTimeType::class, [
                 'widget' => 'single_text',
-                'html5' => false
+                'html5' => false,
             ])
             ->add('end', DateTimeType::class, [
                 'widget' => 'single_text',
-                'html5' => false
+                'html5' => false,
             ])
         ;
     }
