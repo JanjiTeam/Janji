@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
+use App\Validator\UnassignedEvent;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,8 +12,11 @@ class AppointmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', HiddenType::class, [
+            ->add('event', HiddenEventType::class, [
                 'required' => true,
+                'constraints' => [
+                    new UnassignedEvent(),
+                ],
             ])
         ;
     }

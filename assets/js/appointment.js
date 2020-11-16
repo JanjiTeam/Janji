@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             info.event.setProp('color', 'green');
             updateAppointmentDisplay(selectedEvent);
-            document.getElementById('appointment_id').value = selectedEvent.id;
+            document.querySelector('input[name="appointment[event]"]').value = selectedEvent.id;
         },
 
     });

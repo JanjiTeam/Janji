@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Calendar;
-use App\Entity\Event;
 use App\Entity\User;
 use App\Form\AppointmentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -49,9 +48,8 @@ class AppointmentController extends AbstractController
     /**
      * @Route("/calendar/{id}", name="appointment_calendar")
      */
-    public function appointmentCalendar(Request $request, $id): Response
+    public function appointmentCalendar(Request $request, ?Calendar $calendar = null): Response
     {
-        $calendar = $this->getDoctrine()->getRepository(Calendar::class)->find($id);
         if (!$calendar) {
             return $this->redirectToRoute('appointment');
         }
@@ -61,16 +59,12 @@ class AppointmentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formData = $form->getData();
-            $eventId = $formData['id'];
-            $event = $this->getDoctrine()->getRepository(Event::class)->find($eventId);
+            $event = $form->get('event')->getData();
 
-            if ($event && $event->getUser() === null) {
-                $event->setUser($this->getUser());
-                $this->getDoctrine()->getManager()->flush();
+            $event->setUser($this->getUser());
+            $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('appointment_confirmation');
-            }
+            return $this->redirectToRoute('appointment_confirmation');
         }
 
         return $this->render('appointment/calendar.html.twig', [

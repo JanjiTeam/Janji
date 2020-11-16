@@ -84,6 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
         initialView: 'timeGridWeek',
         displayEventEnd: true,
         editable: true,
+        eventClassNames: (arg) => {
+            console.log(arg.event);
+            if (arg.event.extendedProps.isUrgent) {
+                return ['urgent'];
+            }
+            return ['test'];
+        },
         eventDrop: async (info) => {
             await editEvent(info.event.id,
                 { start: formatISO(info.event.start), end: formatISO(info.event.end) });
@@ -120,15 +127,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     calendar.render();
-
-    const addEventForm = document.getElementById('add-event-form');
-    addEventForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const start = e.target.querySelector('input[name="event[start]"]').value;
-        const end = e.target.querySelector('input[name="event[end]"]').value;
-
-        addEvent({ start, end }).then(() => {
-            calendar.refetchEvents();
-        });
-    });
 });

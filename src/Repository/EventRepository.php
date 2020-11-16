@@ -23,6 +23,7 @@ class EventRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('e')
             ->join('e.calendar', 'c')
+            ->leftJoin('e.user', 'u')
             ->andWhere('c.id = :cid')
             ->setParameter('cid', $calendarId);
 
@@ -36,8 +37,7 @@ class EventRepository extends ServiceEntityRepository
         }
 
         if ($free) {
-            $qb->leftJoin('e.user', 'u')
-                ->andWhere('u.id IS NULL');
+            $qb->andWhere('u.id IS NULL');
         }
 
         return $qb->getQuery()->getResult();

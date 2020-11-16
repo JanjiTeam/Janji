@@ -120,7 +120,7 @@ class CalendarController extends AbstractController
 
         $events = $this->getDoctrine()->getRepository(Event::class)->findCalendarEventsByPeriod($calendar->getId(), $startDate, $endDate, $free);
 
-        $json = $serializer->serialize($events, 'json', ['groups' => 'get_events']);
+        $json = $serializer->serialize($events, 'json', ['groups' => ['get_events']]);
 
         return new JsonResponse($json, 200, [], true);
     }

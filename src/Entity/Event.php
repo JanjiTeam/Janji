@@ -35,6 +35,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
+     * @Groups({"get_events"})
      */
     private ?User $user;
 
