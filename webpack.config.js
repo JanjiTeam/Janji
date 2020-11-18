@@ -13,6 +13,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('calendar', './assets/js/calendar.js')
     .addEntry('appointment', './assets/js/appointment.js')
+    .addEntry('register', './assets/js/register.js')
 
     .copyFiles({
         from: './assets/images',

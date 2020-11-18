@@ -1,0 +1,14 @@
+login-title: 'Veuillez vous connecter'
+email: Email
+password: 'Mot de passe'
+login: Connexion
+no-account: 'Pas encore de compte ?'
+register: 'Création d''un compte'
+already-have-account: 'Vous avez déjà un compte ?'
+firstname: Prénom
+lastname: Nom
+phone: Téléphone
+repeat-password: 'Répéter le mot de passe'
+agree-terms: 'J''accepte la politique de confidentialité'
+submit: Valider
+password-limit: 'Doit contenir au minimum { limit } charactères'

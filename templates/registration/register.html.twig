@@ -5,61 +5,73 @@
 {% block body %}
     <div class="min-h-screen flex flex-col items-center justify-center svg-background">
         <div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
-            <h1 class="font-medium self-center text-xl sm:text-2xl text-gray-800 mb-6">Register</h1>
+            <h1 class="font-medium self-center text-xl sm:text-2xl text-gray-800 mb-6">{{ 'register'|trans }}</h1>
             {% for flashError in app.flashes('verify_email_error') %}
                 <div class="alert alert-danger" role="alert">{{ flashError }}</div>
             {% endfor %}
-            {{ form_start(registrationForm) }}
+            {{ form_start(registrationForm, {'attr': {'id': 'registration_form'}}) }}
             {{ form_errors(registrationForm) }}
             <div class="flex flex-col mb-6">
-                {{ form_label(registrationForm.firstname, null, {'label_attr': {'class': 'mb-1 text-xs sm:text-sm tracking-wide text-gray-600'}}) }}
-                {{ form_widget(registrationForm.firstname, {'attr': {'placeholder': 'Firstname', 'class': 'text-sm sm:text-base placeholder-gray-500 px-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400'}}) }}
+                {{ form_label(registrationForm.firstname, 'firstname') }}
+                {{ form_widget(registrationForm.firstname, {'attr': {'placeholder': 'firstname'}}) }}
                 {{ form_errors(registrationForm.firstname) }}
             </div>
 
             <div class="flex flex-col mb-6">
-                {{ form_label(registrationForm.lastname, null, {'label_attr': {'class': 'mb-1 text-xs sm:text-sm tracking-wide text-gray-600'}}) }}
-                {{ form_widget(registrationForm.lastname, {'attr': {'placeholder': 'Lastname','class': 'text-sm sm:text-base placeholder-gray-500 px-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400'}}) }}
+                {{ form_label(registrationForm.lastname, 'lastname') }}
+                {{ form_widget(registrationForm.lastname, {'attr': {'placeholder': 'lastname'}}) }}
             </div>
 
             <div class="flex flex-col mb-6">
-                {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'mb-1 text-xs sm:text-sm tracking-wide text-gray-600'}}) }}
-                {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Email','class': 'text-sm sm:text-base placeholder-gray-500 px-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400'}}) }}
+                {{ form_label(registrationForm.email, 'email') }}
+                {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'email'}}) }}
             </div>
 
             <div class="flex flex-col mb-6">
-                {{ form_label(registrationForm.phone, null, {'label_attr': {'class': 'mb-1 text-xs sm:text-sm tracking-wide text-gray-600'}}) }}
-                {{ form_widget(registrationForm.phone, {'attr': {'placeholder': 'Phone','class': 'text-sm sm:text-base placeholder-gray-500 px-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400'}}) }}
+                {{ form_label(registrationForm.phone, 'phone') }}
+                {{ form_widget(registrationForm.phone, {'attr': {'placeholder': 'phone'}}) }}
             </div>
 
             <div class="flex flex-col mb-6">
-                {{ form_label(registrationForm.plainPassword.first, 'Password', {'label_attr': {'class': 'mb-1 text-xs sm:text-sm tracking-wide text-gray-600'}}) }}
-                {{ form_widget(registrationForm.plainPassword.first, {'attr': {'placeholder': 'Password', 'class': 'text-sm sm:text-base placeholder-gray-500 px-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400'}}) }}
+                {{ form_label(registrationForm.plainPassword.first, 'password') }}
+                {{ form_widget(registrationForm.plainPassword.first, {'attr': {'placeholder': 'password', 'minlength': 6}}) }}
+                <div class="flex items-center mt-1 text-gray-600">
+                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="ml-2 text-xs tracking-wide">{{ 'password-limit'|trans({'limit': 6}) }}</span>
+                </div>
+
             </div>
 
             <div class="flex flex-col mb-6">
-                {{ form_label(registrationForm.plainPassword.second, 'Password', {'label_attr': {'class': 'mb-1 text-xs sm:text-sm tracking-wide text-gray-600'}}) }}
-                {{ form_widget(registrationForm.plainPassword.second, {'attr': {'placeholder': 'Password', 'class': 'text-sm sm:text-base placeholder-gray-500 px-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400'}}) }}
+                {{ form_label(registrationForm.plainPassword.second, 'repeat-password') }}
+                {{ form_widget(registrationForm.plainPassword.second, {'attr': {'placeholder': 'repeat-password', 'minlength': 6}}) }}
             </div>
 
             <div class="flex items-center mb-6">
                 {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out'}}) }}
-                {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'ml-2 text-xs sm:text-sm tracking-wide text-gray-600'}}) }}
+                {{ form_label(registrationForm.agreeTerms, 'agree-terms', {'label_attr': {'class': 'ml-2'}}) }}
             </div>
 
             <div class="flex w-full">
                 <button type="submit"
-                        class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded py-2 w-full transition duration-150 ease-in">
-                    <span class="mr-2 uppercase">Register</span>
+                        class="flex items-center justify-center w-full">
+                    <span class="mr-2 uppercase">{{ 'submit'|trans }}</span>
                 </button>
             </div>
             {{ form_end(registrationForm) }}
             <div class="flex justify-center items-center mt-6">
                 <a href="{{ path('app_login') }}"
-                   class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center">
-                    <span class="ml-2">Already have an account?</span>
+                   class="inline-flex items-center font-bold text-xs text-center">
+                    <span class="ml-2">{{ 'already-have-account'|trans }}</span>
                 </a>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('register') }}
 {% endblock %}
