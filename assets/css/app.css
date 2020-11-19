@@ -19,12 +19,7 @@ a.fc-event {
 }
 
 a {
-    @apply text-light-blue-500;
-}
-
-a:hover,
-a:focus {
-    @apply text-light-blue-600;
+    @apply text-light-blue-500 focus:text-light-blue-600;
 }
 
 label {
@@ -32,7 +27,7 @@ label {
 }
 
 input {
-    @apply text-sm px-4 rounded-lg border border-gray-400 py-2 shadow-none;
+    @apply text-sm px-4 rounded-lg border border-gray-400 py-2 shadow-none focus:outline-none focus:border-light-blue-500 placeholder-gray-500;
 }
 
 input:invalid,
@@ -40,27 +35,9 @@ input:invalid:focus {
     @apply border-red-500;
 }
 
-input::placeholder {
-    @apply text-gray-500;
-}
-
-input:focus {
-    @apply outline-none border-light-blue-500;
-}
-
 button,
 .btn {
-    @apply text-white text-sm bg-light-blue-500 rounded py-2 transition duration-150 ease-in;
-}
-
-button:focus,
-.btn:focus {
-    @apply outline-none;
-}
-
-button:hover,
-.btn:focus {
-    @apply bg-light-blue-600;
+    @apply text-white text-sm bg-light-blue-500 rounded py-2 transition duration-150 ease-in focus:outline-none hover:bg-light-blue-600;
 }
 
 @screen sm {
