@@ -100,6 +100,7 @@ class CalendarController extends AbstractController
 
     /**
      * @Route("/{id}/events", name="get_calendar_events", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function getCalendarEvents(Request $request, Calendar $calendar, SerializerInterface $serializer): JsonResponse
     {

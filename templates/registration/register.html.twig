@@ -2,9 +2,11 @@
 
 {% block title %}Register{% endblock %}
 
+{% block header %}{% endblock %}
+
 {% block body %}
     <div class="min-h-screen flex flex-col items-center justify-center svg-background">
-        <div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
+        <div class="flex flex-col bg-white shadow-lg px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-lg w-full max-w-md">
             <h1 class="font-medium self-center text-xl sm:text-2xl text-gray-800 mb-6">{{ 'register'|trans }}</h1>
             {% for flashError in app.flashes('verify_email_error') %}
                 <div class="alert alert-danger" role="alert">{{ flashError }}</div>

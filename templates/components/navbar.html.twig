@@ -1,3 +1,29 @@
-<nav>
+<nav class="p-4 w-full">
+    <div class="p-2 text-gray-900 bg-white rounded-lg shadow-lg font-medium capitalize flex items-center">
+            <span class="px-2 mr-2 border-r border-gray-800">
+          <img src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png"
+               alt="alt placeholder" class="w-8 h-8 inline-flex mx-auto">
+        </span>
+        <a href="{{ path('calendar_index') }}"
+           class="inline-flex items-center justify-center relative px-2 py-1 cursor-pointer text-current hover:bg-gray-200 hover:text-gray-700 focus:bg-gray-200 focus:text-gray-700 text-sm rounded">
+            <svg class="w-6 h-6 inline-flex" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span class="mx-1">Calendrier</span>
+        </a>
 
+        <div class="ml-auto">
+                <span class="relative inline-flex items-center justify-center relative px-2 py-1 cursor-pointer hover:bg-gray-200 hover:text-gray-700 text-sm rounded">
+                    <span class="mx-1">{{ app.user.email }}</span>
+                    <svg class="w-6 h-6 inline-flex" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    {# <span class="absolute right-0 top-0 -mt-1 -mr-1 text-xs bg-yellow-500 text-black font-medium px-2 rounded-full">3</span> #}
+                </span>
+        </div>
+    </div>
 </nav>

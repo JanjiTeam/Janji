@@ -8,6 +8,8 @@ import frLocale from '@fullcalendar/core/locales/fr';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
+import Swal from 'sweetalert2';
+
 let selectedEvent = null;
 
 const updateAppointmentDisplay = (event) => {
@@ -61,7 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedEvent !== null) {
             e.target.submit();
         } else {
-            alert('Veuillez choisir un créneau disponible');
+            Swal.fire({
+                title: 'Veuillez choisir un créneau disponible',
+                icon: 'warning',
+                confirmButtonText: 'OK',
+            });
         }
     });
 });

@@ -19,7 +19,7 @@ a.fc-event {
 }
 
 a {
-    @apply text-light-blue-500 focus:text-light-blue-600;
+    @apply text-light-blue-500 focus:text-light-blue-600 hover:text-light-blue-600;
 }
 
 label {

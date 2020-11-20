@@ -1,0 +1,3 @@
+.assigned-event {
+    @apply bg-red-500 border-red-500;
+}

@@ -7,10 +7,9 @@ import frLocale from '@fullcalendar/core/locales/fr';
 
 import { formatISO, addMinutes } from 'date-fns';
 
-import flatpickr from 'flatpickr';
-import { French } from 'flatpickr/dist/l10n/fr';
+import Swal from 'sweetalert2';
 
-import 'flatpickr/dist/flatpickr.min.css';
+import '../css/calendar.css';
 
 const addEvent = async (payload) => {
     // eslint-disable-next-line no-undef
@@ -63,12 +62,6 @@ const deleteEvent = async (id) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    flatpickr('.datepicker', {
-        locale: French,
-        enableTime: true,
-        time_24hr: true,
-    });
-
     const calendarEl = document.getElementById('calendar');
 
     const calendar = new Calendar(calendarEl, {
@@ -85,11 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
         displayEventEnd: true,
         editable: true,
         eventClassNames: (arg) => {
-            console.log(arg.event);
-            if (arg.event.extendedProps.isUrgent) {
-                return ['urgent'];
+            if (arg.event.extendedProps.user !== null) {
+                return ['assigned-event'];
             }
-            return ['test'];
+            return ['free-event'];
         },
         eventDrop: async (info) => {
             await editEvent(info.event.id,
@@ -105,9 +97,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (info.event.id === '') {
                 eventId = info.event.extendedProps.id;
             }
-
-            // eslint-disable-next-line no-restricted-globals
-            if (confirm('Confimer la suppression ?')) {
+            const input = await Swal.fire({
+                title: 'Confirmer la suppression ?',
+                text: 'La supression d\'un créneau est définitif.',
+                icon: 'warning',
+                confirmButtonText: 'Valider',
+                showCancelButton: true,
+                cancelButtonText: 'Annuler',
+            });
+            if (input.isConfirmed) {
                 await deleteEvent(eventId);
                 info.event.remove();
             }
