@@ -37,7 +37,7 @@ input:invalid:focus {
 
 button,
 .btn {
-    @apply text-white text-sm bg-light-blue-500 rounded py-2 transition duration-150 ease-in focus:outline-none hover:bg-light-blue-600;
+    @apply text-white bg-light-blue-500 rounded py-2 px-4 transition duration-150 ease-in focus:outline-none hover:bg-light-blue-600 hover:text-white;
 }
 
 @screen sm {
@@ -46,11 +46,6 @@ button,
     }
 
     input {
-        @apply text-base;
-    }
-
-    button,
-    .btn {
         @apply text-base;
     }
 }

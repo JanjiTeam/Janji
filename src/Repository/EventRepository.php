@@ -42,4 +42,16 @@ class EventRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findUserFutureEvents($userId)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->join('e.user', 'u')
+            ->andWhere('e.start >= :now')
+            ->andWhere('u.id = :uid')
+            ->setParameter('now', new \DateTimeImmutable('now'))
+            ->setParameter('uid', $userId);
+
+        return $qb->getQuery()->getResult();
+    }
 }

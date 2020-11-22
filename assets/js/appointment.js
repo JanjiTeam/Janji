@@ -11,13 +11,16 @@ import { fr } from 'date-fns/locale';
 import Swal from 'sweetalert2';
 
 let selectedEvent = null;
+const appointmentDisplayBlockEl = document.getElementById('appointment-display-block');
+appointmentDisplayBlockEl.classList.add('hidden');
 
 const updateAppointmentDisplay = (event) => {
+    appointmentDisplayBlockEl.classList.remove('hidden');
     const appointmentDisplayEl = document.getElementById('appointment-display');
     const date = format(event.start, 'EEEE d LLLL Y', { locale: fr });
     const start = format(event.start, 'p', { locale: fr });
     const end = format(event.end, 'p', { locale: fr });
-    appointmentDisplayEl.innerHTML = `Le ${date} de ${start} à ${end}`;
+    appointmentDisplayEl.innerHTML = `Le <span class="font-bold capitalize">${date}</span><br> de <span class="font-bold">${start}</span> à <span class="font-bold">${end}</span>`;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initialView: 'timeGridWeek',
         displayEventEnd: true,
         editable: false,
+        allDaySlot: false,
         eventClick: (info) => {
             selectedEvent = info.event;
             calendar.getEvents().forEach((e) => {
