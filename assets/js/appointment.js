@@ -1,7 +1,7 @@
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 
 import frLocale from '@fullcalendar/core/locales/fr';
 
@@ -10,7 +10,7 @@ import { fr } from 'date-fns/locale';
 
 import Swal from 'sweetalert2';
 
-let selectedEvent = null;
+const selectedEvent = null;
 const appointmentDisplayBlockEl = document.getElementById('appointment-display-block');
 appointmentDisplayBlockEl.classList.add('hidden');
 
@@ -24,6 +24,16 @@ const updateAppointmentDisplay = (event) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    const draggableEl = document.getElementById('drag-events-wrapper');
+
+    const drag = new Draggable(draggableEl, {
+        itemSelector: '.drag-event',
+        eventData: (eventEl) => ({
+            duration: { minutes: eventEl.dataset.duration },
+            constraint: 'slot',
+        }),
+    });
+
     const calendarEl = document.getElementById('calendar');
 
     const calendar = new Calendar(calendarEl, {
@@ -32,9 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // eslint-disable-next-line no-undef
                 url: `/calendar/${calendarId}/events`,
                 method: 'GET',
-                extraParams: {
-                    free: 1,
-                },
+                constraint: 'slot',
+            },
+            {
+                // eslint-disable-next-line no-undef
+                url: `/calendar/${calendarId}/slots`,
+                display: 'background',
+                eventDataTransform: (eventData) => ({ ...eventData, groupId: 'slot' }),
             },
         ],
         headerToolbar: {
@@ -47,16 +61,17 @@ document.addEventListener('DOMContentLoaded', () => {
         initialView: 'timeGridWeek',
         displayEventEnd: true,
         editable: false,
+        droppable: true,
         allDaySlot: false,
-        eventClick: (info) => {
-            selectedEvent = info.event;
-            calendar.getEvents().forEach((e) => {
-                e.setProp('color', 'blue');
-            });
-            info.event.setProp('color', 'green');
-            updateAppointmentDisplay(selectedEvent);
-            document.querySelector('input[name="appointment[event]"]').value = selectedEvent.id;
-        },
+        // eventClick: (info) => {
+        //     selectedEvent = info.event;
+        //     calendar.getEvents().forEach((e) => {
+        //         e.setProp('color', 'blue');
+        //     });
+        //     info.event.setProp('color', 'green');
+        //     updateAppointmentDisplay(selectedEvent);
+        //     document.querySelector('input[name="appointment[event]"]').value = selectedEvent.id;
+        // },
 
     });
 

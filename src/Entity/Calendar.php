@@ -35,9 +35,26 @@ class Calendar
      */
     private Collection $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Slot::class, mappedBy="calendar", orphanRemoval=true, cascade={"persist"})
+     */
+    private $slots;
+
+    /**
+     * @ORM\OneToMany(targetEntity=EventType::class, mappedBy="calendar")
+     */
+    private $eventTypes;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->slots = new ArrayCollection();
+        $this->eventTypes = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     public function getId(): ?int
@@ -96,6 +113,66 @@ class Calendar
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Slot[]
+     */
+    public function getSlots(): Collection
+    {
+        return $this->slots;
+    }
+
+    public function addSlot(Slot $slot): self
+    {
+        if (!$this->slots->contains($slot)) {
+            $this->slots[] = $slot;
+            $slot->setCalendar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSlot(Slot $slot): self
+    {
+        if ($this->slots->removeElement($slot)) {
+            // set the owning side to null (unless already changed)
+            if ($slot->getCalendar() === $this) {
+                $slot->setCalendar(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EventType[]
+     */
+    public function getEventTypes(): Collection
+    {
+        return $this->eventTypes;
+    }
+
+    public function addEventType(EventType $eventType): self
+    {
+        if (!$this->eventTypes->contains($eventType)) {
+            $this->eventTypes[] = $eventType;
+            $eventType->setCalendar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventType(EventType $eventType): self
+    {
+        if ($this->eventTypes->removeElement($eventType)) {
+            // set the owning side to null (unless already changed)
+            if ($eventType->getCalendar() === $this) {
+                $eventType->setCalendar(null);
+            }
+        }
 
         return $this;
     }

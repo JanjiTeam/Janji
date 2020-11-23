@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Calendar;
 use App\Entity\Event;
+use App\Entity\Slot;
 use App\Form\CalendarType;
-use App\Form\EventType;
 use App\Repository\CalendarRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,13 +61,12 @@ class CalendarController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="calendar_show", methods={"GET","POST"})
+     * @Route("/show/{id}", name="calendar_show", methods={"GET","POST"})
      * @IsGranted("ROLE_PRO")
      */
-    public function edit(Request $request, Calendar $calendar): Response
+    public function show(Request $request, Calendar $calendar): Response
     {
         $formCalendar = $this->createForm(CalendarType::class, $calendar);
-        $formEvent = $this->createForm(EventType::class);
         $formCalendar->handleRequest($request);
 
         if ($formCalendar->isSubmitted() && $formCalendar->isValid()) {
@@ -79,7 +78,27 @@ class CalendarController extends AbstractController
         return $this->render('calendar/show.html.twig', [
             'calendar' => $calendar,
             'form' => $formCalendar->createView(),
-            'formEvent' => $formEvent->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="calendar_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_PRO")
+     */
+    public function edit(Request $request, Calendar $calendar): Response
+    {
+        $formCalendar = $this->createForm(CalendarType::class, $calendar);
+        $formCalendar->handleRequest($request);
+
+        if ($formCalendar->isSubmitted() && $formCalendar->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('calendar_index');
+        }
+
+        return $this->render('calendar/edit.html.twig', [
+            'calendar' => $calendar,
+            'form' => $formCalendar->createView(),
         ]);
     }
 
@@ -147,6 +166,58 @@ class CalendarController extends AbstractController
         $entityManager->flush();
 
         $jsonResponse = $serializer->serialize($event, 'json', ['groups' => 'get_events']);
+
+        return new JsonResponse($jsonResponse, 201, [], true);
+    }
+
+    /**
+     * @Route("/{id}/slots", name="get_calendar_slots", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     */
+    public function getCalendarSlots(Request $request, Calendar $calendar, SerializerInterface $serializer)
+    {
+        $start = $request->query->get('start');
+        $end = $request->query->get('end');
+
+        $startDate = null;
+        $endDate = null;
+
+        if ($start) {
+            $startDate = new \DateTimeImmutable($start);
+        }
+
+        if ($end) {
+            $endDate = new \DateTimeImmutable($end);
+        }
+
+        $events = $this->getDoctrine()->getRepository(Slot::class)->findCalendarSlotsByPeriod($calendar->getId(), $startDate, $endDate);
+
+        $json = $serializer->serialize($events, 'json', ['groups' => ['get_slots']]);
+
+        return new JsonResponse($json, 200, [], true);
+    }
+
+    /**
+     * @Route("/{id}/slots", name="add_calendar_slots", methods={"POST"})
+     * @IsGranted("ROLE_PRO")
+     */
+    public function addCalendarSlots(Request $request, Calendar $calendar, SerializerInterface $serializer): JsonResponse
+    {
+        $json = json_decode($request->getContent(), false);
+        $slot = new Slot();
+        $slot->setStart(new \DateTimeImmutable($json->start));
+        if (property_exists($json, 'end')) {
+            $slot->setEnd(new \DateTimeImmutable($json->end));
+        } else {
+            $slot->setEnd($slot->getStart()->add(new \DateInterval('PT1H')));
+        }
+
+        $calendar->addSlot($slot);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+
+        $jsonResponse = $serializer->serialize($slot, 'json', ['groups' => 'get_slots']);
 
         return new JsonResponse($jsonResponse, 201, [], true);
     }

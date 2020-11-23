@@ -37,13 +37,18 @@ class Event
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
      * @Groups({"get_events"})
      */
-    private ?User $user;
+    private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
     private Calendar $calendar;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=EventType::class, inversedBy="events")
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -94,6 +99,18 @@ class Event
     public function setCalendar(Calendar $calendar): self
     {
         $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    public function getType(): ?EventType
+    {
+        return $this->type;
+    }
+
+    public function setType(?EventType $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
