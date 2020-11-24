@@ -10,11 +10,16 @@ import { fr } from 'date-fns/locale';
 
 import Swal from 'sweetalert2';
 
-const selectedEvent = null;
+import '../css/calendar.css';
+
+let selectedEvent = null;
 const appointmentDisplayBlockEl = document.getElementById('appointment-display-block');
 appointmentDisplayBlockEl.classList.add('hidden');
 
+const draggableEl = document.getElementById('drag-events-wrapper');
+
 const updateAppointmentDisplay = (event) => {
+    draggableEl.classList.add('hidden');
     appointmentDisplayBlockEl.classList.remove('hidden');
     const appointmentDisplayEl = document.getElementById('appointment-display');
     const date = format(event.start, 'EEEE d LLLL Y', { locale: fr });
@@ -23,9 +28,15 @@ const updateAppointmentDisplay = (event) => {
     appointmentDisplayEl.innerHTML = `Le <span class="font-bold capitalize">${date}</span><br> de <span class="font-bold">${start}</span> à <span class="font-bold">${end}</span>`;
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    const draggableEl = document.getElementById('drag-events-wrapper');
+const updateEventForm = (event) => {
+    const eventStartInput = document.getElementById('event_start');
+    const eventEndInput = document.getElementById('event_end');
 
+    eventStartInput.value = event.startStr;
+    eventEndInput.value = event.endStr;
+};
+
+document.addEventListener('DOMContentLoaded', () => {
     const drag = new Draggable(draggableEl, {
         itemSelector: '.drag-event',
         eventData: (eventEl) => ({
@@ -43,6 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 url: `/calendar/${calendarId}/events`,
                 method: 'GET',
                 constraint: 'slot',
+                editable: false,
+                className: 'assigned-event',
+                overlap: false,
+                eventDataTransform: (eventData) => ({ ...eventData, groupId: 'assigned-event' }),
             },
             {
                 // eslint-disable-next-line no-undef
@@ -60,24 +75,33 @@ document.addEventListener('DOMContentLoaded', () => {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         initialView: 'timeGridWeek',
         displayEventEnd: true,
-        editable: false,
+        eventDurationEditable: false,
+        editable: true,
         droppable: true,
         allDaySlot: false,
-        // eventClick: (info) => {
-        //     selectedEvent = info.event;
-        //     calendar.getEvents().forEach((e) => {
-        //         e.setProp('color', 'blue');
-        //     });
-        //     info.event.setProp('color', 'green');
-        //     updateAppointmentDisplay(selectedEvent);
-        //     document.querySelector('input[name="appointment[event]"]').value = selectedEvent.id;
-        // },
-
+        eventReceive: (info) => {
+            selectedEvent = info.event;
+            updateAppointmentDisplay(selectedEvent);
+            updateEventForm(selectedEvent);
+        },
+        eventDrop: (info) => {
+            selectedEvent = info.event;
+            updateAppointmentDisplay(selectedEvent);
+            updateEventForm(selectedEvent);
+        },
+        eventClick: (info) => {
+            if (!info.jsEvent.target.classList.contains('fc-bg-event') && info.event.groupId !== 'assigned-event') {
+                info.event.remove();
+                selectedEvent = null;
+                draggableEl.classList.remove('hidden');
+                appointmentDisplayBlockEl.classList.add('hidden');
+            }
+        },
     });
 
     calendar.render();
 
-    document.querySelector('form[name="appointment"]').addEventListener('submit', (e) => {
+    document.querySelector('form[name="event"]').addEventListener('submit', (e) => {
         e.preventDefault();
         if (selectedEvent !== null) {
             e.target.submit();
@@ -88,5 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 confirmButtonText: 'OK',
             });
         }
+    });
+    document.querySelector('form[name="event"]').addEventListener('reset', () => {
+        selectedEvent.remove();
+        selectedEvent = null;
+        draggableEl.classList.remove('hidden');
+        appointmentDisplayBlockEl.classList.add('hidden');
     });
 });

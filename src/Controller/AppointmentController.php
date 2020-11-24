@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Calendar;
 use App\Entity\Event;
 use App\Entity\User;
-use App\Form\AppointmentType;
+use App\Form\EventType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,14 +63,16 @@ class AppointmentController extends AbstractController
             return $this->redirectToRoute('appointment');
         }
 
-        $form = $this->createForm(AppointmentType::class);
+        $event = new Event();
+
+        $form = $this->createForm(EventType::class, $event);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $event = $form->get('event')->getData();
-
+            $event->setCalendar($calendar);
             $event->setUser($this->getUser());
+            $this->getDoctrine()->getManager()->persist($event);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('appointment_confirmation');
