@@ -1,11 +1,10 @@
 import { Calendar } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 
 import frLocale from '@fullcalendar/core/locales/fr';
 
-import { format } from 'date-fns';
+import { format, differenceInMinutes } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
 import Swal from 'sweetalert2';
@@ -69,16 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek',
+            right: 'timeGridWeek',
         },
         locale: frLocale,
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        plugins: [timeGridPlugin, interactionPlugin],
         initialView: 'timeGridWeek',
         displayEventEnd: true,
         eventDurationEditable: false,
         editable: true,
         droppable: true,
         allDaySlot: false,
+        nowIndicator: true,
+        validRange: (nowDate) => ({
+            start: nowDate,
+        }),
+        eventDidMount: (arg) => {
+            if (differenceInMinutes(new Date(), arg.event.start) > 0) {
+                arg.event.remove();
+            }
+        },
         eventReceive: (info) => {
             selectedEvent = info.event;
             updateAppointmentDisplay(selectedEvent);

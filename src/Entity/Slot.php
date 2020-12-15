@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SlotRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SlotRepository::class)
@@ -28,6 +29,7 @@ class Slot
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"get_slots"})
+     * @Assert\GreaterThan(propertyPath="start")
      */
     private \DateTimeImmutable $end;
 

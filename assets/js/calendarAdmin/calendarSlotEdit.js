@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initialView: 'timeGridWeek',
         displayEventEnd: true,
         editable: true,
+        nowIndicator: true,
         eventClassNames: (arg) => {
             if (arg.event.extendedProps.user !== null) {
                 return ['assigned-event'];
@@ -88,11 +89,23 @@ document.addEventListener('DOMContentLoaded', () => {
             return ['free-event'];
         },
         eventDrop: async (info) => {
-            await editSlot(info.event.id,
+            let eventId = info.event.id;
+
+            if (info.event.id === '') {
+                eventId = info.event.extendedProps.id;
+            }
+
+            await editSlot(eventId,
                 { start: formatISO(info.event.start), end: formatISO(info.event.end) });
         },
         eventResize: async (info) => {
-            await editSlot(info.event.id,
+            let eventId = info.event.id;
+
+            if (info.event.id === '') {
+                eventId = info.event.extendedProps.id;
+            }
+
+            await editSlot(eventId,
                 { start: formatISO(info.event.start), end: formatISO(info.event.end) });
         },
         eventClick: async (info) => {

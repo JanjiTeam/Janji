@@ -38,6 +38,7 @@
                     {{ form_end(appointmentForm) }}
                     <hr class="mt-4">
                 </div>
+                {% if futureEvents | length > 0 %}
                 <div>
                     <h3>Vos rendez-vous à venir : </h3>
                     <ul>
@@ -46,6 +47,7 @@
                         {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
             </aside>
         </div>
 

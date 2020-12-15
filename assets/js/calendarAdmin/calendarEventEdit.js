@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initialView: 'timeGridWeek',
         displayEventEnd: true,
         editable: true,
+        nowIndicator: true,
         eventClassNames: (arg) => {
             if (arg.event.extendedProps.user !== null) {
                 return ['assigned-event'];
