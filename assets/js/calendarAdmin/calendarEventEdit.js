@@ -9,7 +9,7 @@ import { formatISO, addMinutes } from 'date-fns';
 
 import Swal from 'sweetalert2';
 
-import '../css/calendar.css';
+import '../../css/calendar.css';
 
 const addEvent = async (payload) => {
     // eslint-disable-next-line no-undef
@@ -65,8 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const calendarEl = document.getElementById('calendar');
 
     const calendar = new Calendar(calendarEl, {
-        // eslint-disable-next-line no-undef
-        events: `/calendar/${calendarId}/events`,
+        eventSources: [
+            {
+                // eslint-disable-next-line no-undef
+                url: `/calendar/${calendarId}/events`,
+                constraint: 'slot',
+            },
+            {
+                // eslint-disable-next-line no-undef
+                url: `/calendar/${calendarId}/slots`,
+                display: 'background',
+                eventDataTransform: (eventData) => ({ ...eventData, groupId: 'slot' }),
+            },
+        ],
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -77,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initialView: 'timeGridWeek',
         displayEventEnd: true,
         editable: true,
+        nowIndicator: true,
         eventClassNames: (arg) => {
             if (arg.event.extendedProps.user !== null) {
                 return ['assigned-event'];
@@ -84,30 +96,43 @@ document.addEventListener('DOMContentLoaded', () => {
             return ['free-event'];
         },
         eventDrop: async (info) => {
-            await editEvent(info.event.id,
-                { start: formatISO(info.event.start), end: formatISO(info.event.end) });
-        },
-        eventResize: async (info) => {
-            await editEvent(info.event.id,
-                { start: formatISO(info.event.start), end: formatISO(info.event.end) });
-        },
-        eventClick: async (info) => {
             let eventId = info.event.id;
 
             if (info.event.id === '') {
                 eventId = info.event.extendedProps.id;
             }
-            const input = await Swal.fire({
-                title: 'Confirmer la suppression ?',
-                text: 'La supression d\'un créneau est définitif.',
-                icon: 'warning',
-                confirmButtonText: 'Valider',
-                showCancelButton: true,
-                cancelButtonText: 'Annuler',
-            });
-            if (input.isConfirmed) {
-                await deleteEvent(eventId);
-                info.event.remove();
+
+            await editEvent(eventId,
+                { start: formatISO(info.event.start), end: formatISO(info.event.end) });
+        },
+        eventResize: async (info) => {
+            let eventId = info.event.id;
+
+            if (info.event.id === '') {
+                eventId = info.event.extendedProps.id;
+            }
+            await editEvent(eventId,
+                { start: formatISO(info.event.start), end: formatISO(info.event.end) });
+        },
+        eventClick: async (info) => {
+            if (!info.jsEvent.target.classList.contains('fc-bg-event')) {
+                let eventId = info.event.id;
+
+                if (info.event.id === '') {
+                    eventId = info.event.extendedProps.id;
+                }
+                const input = await Swal.fire({
+                    title: 'Confirmer la suppression ?',
+                    text: 'La supression d\'un créneau est définitif.',
+                    icon: 'warning',
+                    confirmButtonText: 'Valider',
+                    showCancelButton: true,
+                    cancelButtonText: 'Annuler',
+                });
+                if (input.isConfirmed) {
+                    await deleteEvent(eventId);
+                    info.event.remove();
+                }
             }
         },
         dateClick: async (info) => {

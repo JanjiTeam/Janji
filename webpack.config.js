@@ -11,7 +11,8 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .addEntry('app', './assets/js/app.js')
-    .addEntry('calendar', './assets/js/calendar.js')
+    .addEntry('calendarEventEdit', './assets/js/calendarAdmin/calendarEventEdit.js')
+    .addEntry('calendarSlotEdit', './assets/js/calendarAdmin/calendarSlotEdit.js')
     .addEntry('appointment', './assets/js/appointment.js')
     .addEntry('register', './assets/js/register.js')
 
