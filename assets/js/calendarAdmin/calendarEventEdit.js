@@ -75,9 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // eslint-disable-next-line no-undef
                 url: `/calendar/${calendarId}/slots`,
                 display: 'background',
-                eventDataTransform: (eventData) => {
-                    return { ...eventData, groupId: 'slot' };
-                },
+                eventDataTransform: (eventData) => ({ ...eventData, groupId: 'slot' }),
             },
         ],
         headerToolbar: {

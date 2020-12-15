@@ -36,6 +36,7 @@ const updateEventForm = (event) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // eslint-disable-next-line no-unused-vars
     const drag = new Draggable(draggableEl, {
         itemSelector: '.drag-event',
         eventData: (eventEl) => ({
