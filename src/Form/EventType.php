@@ -16,10 +16,12 @@ class EventType extends AbstractType
             ->add('start', DateTimeType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
+                'input' => 'datetime_immutable',
             ])
             ->add('end', DateTimeType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
+                'input' => 'datetime_immutable',
             ])
         ;
     }
