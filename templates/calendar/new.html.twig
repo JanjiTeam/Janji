@@ -3,9 +3,21 @@
 {% block title %}New Calendar{% endblock %}
 
 {% block body %}
-    <h1>Create new Calendar</h1>
+    <div class="container mx-auto pt-4">
+        <h1 class="text-2xl mb-4">{{ 'new_calendar_title'|trans }}</h1>
 
-    {{ include('calendar/_form.html.twig') }}
+        {{ form_start(form) }}
+        <div class="flex flex-col mb-6">
+            {{ form_label(form.title, 'title') }}
+            {{ form_widget(form.title, {'attr': {'placeholder': 'title'}}) }}
+        </div>
+        <div class="flex justify-between items-center">
+            <a href="{{ path('calendar_index') }}">{{ 'back'|trans }}</a>
+            <button class="btn">{{ button_label|default('save')|trans }}</button>
+        </div>
 
-    <a href="{{ path('calendar_index') }}">back to list</a>
+        {{ form_end(form) }}
+
+    </div>
+
 {% endblock %}

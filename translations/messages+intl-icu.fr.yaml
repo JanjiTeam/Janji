@@ -15,3 +15,16 @@ password-limit: 'Doit contenir au minimum { limit } charactères'
 to_login: 'Se connecter'
 to_register: 'Créer un compte'
 to_calendar: 'Voir les créneaux disponibles'
+title: Titre
+id: Id
+actions: Actions
+show: Voir
+edit: Editer
+calendar_index: 'Liste des calendriers'
+new_calendar: 'Nouveau calendrier'
+back: Retour
+save: Enregistrer
+new_calendar_title: 'Créer un nouveau calendrier'
+calendar_slot_edit_title: 'Modifier les créneaux du calendrier'
+calendar_event_edit_title: 'Voir et modifier les évènements du calendrier'
+delete: 'Supprimer'

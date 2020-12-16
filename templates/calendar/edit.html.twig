@@ -8,15 +8,38 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ calendar.title }}</h1>
+    <div class="container mx-auto py-4">
+        <div class="flex justify-between pb-4">
+            <h1 class="text-2xl mb-4">{{ 'calendar_slot_edit_title'|trans }}</h1>
+            {{ include('calendar/_delete_form.html.twig') }}
+        </div>
 
-    <div class="container">
-        <div id="calendar"></div>
+
+        <div class="mb-4">
+            <div class="mb-2">
+                <p>Pour définir une nouvelle plage horaire, cliquer directement sur le calendrier.</p>
+                <p>Une plage horaire peut etre déplacer en faisant un glisser-déposer sur le calendrier. Cela modifie sa date de début.</p>
+                <p>Une plage horaire peut etre raccourci ou ralongé en étirant par le bas. Cela modifie sa date de fin.</p>
+                <p>Une plage peut etre supprimé en cliquant directement dessus.</p>
+                <p>Attention : la modification des plages ne modifie pas les rendez-vous déjà associés.</p>
+            </div>
+
+            <div id="calendar"></div>
+        </div>
+
+        {{ form_start(form) }}
+        <div class="flex flex-col mb-6">
+            {{ form_label(form.title, 'title') }}
+            {{ form_widget(form.title, {'attr': {'placeholder': 'title'}}) }}
+        </div>
+        <div class="flex justify-between items-center">
+            <a href="{{ path('calendar_index') }}">{{ 'back'|trans }}</a>
+            <button class="btn">{{ button_label|default('save')|trans }}</button>
+        </div>
+
+        {{ form_end(form) }}
     </div>
 
-    <a href="{{ path('calendar_index') }}">back to list</a>
-
-    {{ include('calendar/_delete_form.html.twig') }}
 {% endblock %}
 
 {% block javascripts %}

@@ -3,33 +3,41 @@
 {% block title %}Calendar index{% endblock %}
 
 {% block body %}
-    <h1>Calendar index</h1>
+    <div class="container mx-auto pt-4">
+        <div class="flex justify-between align-middle mb-4">
+            <h1 class="text-2xl">{{ 'calendar_index'|trans }}</h1>
+            <a href="{{ path('calendar_new') }}" class="btn">{{ 'new_calendar'|trans }}</a>
+        </div>
+        <table class="table-fixed min-w-full">
+            <thead>
+            <tr>
+                <th class="w-1/4">
+                    {{ 'id'|trans }}</th>
+                <th class="w-1/2">
+                    {{ 'title'|trans }}</th>
+                <th class="w-1/4">
+                    {{ 'actions'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for calendar in calendars %}
+                <tr>
+                    <td>{{ calendar.id }}</td>
+                    <td>{{ calendar.title }}</td>
+                    <td>
+                        <a href="{{ path('calendar_show', {'id': calendar.id}) }}" class="btn">{{ 'show'|trans }}</a>
+                        <a href="{{ path('calendar_edit', {'id': calendar.id}) }}" class="btn">{{ 'edit'|trans }}</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for calendar in calendars %}
-            <tr>
-                <td>{{ calendar.id }}</td>
-                <td>{{ calendar.title }}</td>
-                <td>
-                    <a href="{{ path('calendar_show', {'id': calendar.id}) }}">show</a>
-                    <a href="{{ path('calendar_edit', {'id': calendar.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('calendar_new') }}">Create new</a>
+    </div>
+
 {% endblock %}
