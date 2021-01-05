@@ -3,14 +3,17 @@
 {% block title %}EventType index{% endblock %}
 
 {% block body %}
-    <h1>EventType index</h1>
-
-    <table class="table">
+<div class="container mx-auto pt-4">
+    <div class="flex justify-between align-middle mb-4">
+        <h1 class="text-2xl">{{ 'event_type_index'|trans }}</h1>
+        <a href="{{ path('event_type_new') }}" class="btn">{{ 'new_event_type'|trans }}</a>
+    </div>
+    <table class="table-fixed min-w-full">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>actions</th>
+                <th>{{ 'id'|trans }}</th>
+                <th>{{ 'title'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -19,17 +22,17 @@
                 <td>{{ event_type.id }}</td>
                 <td>{{ event_type.title }}</td>
                 <td>
-                    <a href="{{ path('event_type_show', {'id': event_type.id}) }}">show</a>
-                    <a href="{{ path('event_type_edit', {'id': event_type.id}) }}">edit</a>
+                    <a href="{{ path('event_type_edit', {'id': event_type.id}) }}" class="btn">{{ 'edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ 'no_records'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('event_type_new') }}">Create new</a>
+
+</div>
 {% endblock %}

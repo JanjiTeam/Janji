@@ -1,4 +1,19 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="flex flex-col mb-6">
+    {{ form_label(form.title, 'title') }}
+    {{ form_widget(form.title, {'attr': {'placeholder': 'title'}}) }}
+</div>
+<div class="flex flex-col mb-6">
+    {{ form_label(form.duration, 'duration') }}
+    {{ form_widget(form.duration, {'attr': {'placeholder': 'duration'}}) }}
+</div>
+<div class="flex flex-col mb-6">
+    {{ form_label(form.calendar, 'calendar') }}
+    {{ form_widget(form.calendar, {'attr': {'placeholder': 'calendar'}}) }}
+</div>
+<div class="flex justify-between items-center">
+    <a href="{{ path('event_type_index') }}">{{ 'back'|trans }}</a>
+    <button class="btn">{{ button_label|default('save')|trans }}</button>
+</div>
+
 {{ form_end(form) }}

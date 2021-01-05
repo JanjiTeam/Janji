@@ -3,9 +3,9 @@
 {% block title %}New EventType{% endblock %}
 
 {% block body %}
-    <h1>Create new EventType</h1>
+<div class="container mx-auto pt-4">
+    <h1 class="text-2xl mb-4">{{ 'new_event_type_title'|trans }}</h1>
 
     {{ include('event_type/_form.html.twig') }}
-
-    <a href="{{ path('event_type_index') }}">back to list</a>
+</div>
 {% endblock %}

@@ -51,16 +51,6 @@ class EventTypeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="event_type_show", methods={"GET"})
-     */
-    public function show(EventType $eventType): Response
-    {
-        return $this->render('event_type/show.html.twig', [
-            'event_type' => $eventType,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="event_type_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, EventType $eventType): Response

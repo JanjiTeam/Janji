@@ -26,8 +26,9 @@ label {
     @apply mb-1 text-xs tracking-wide text-gray-600;
 }
 
-input {
-    @apply text-sm px-4 rounded-lg border border-gray-400 py-2 shadow-none focus:outline-none focus:border-light-blue-500 placeholder-gray-500;
+input,
+select {
+    @apply bg-white text-sm px-4 rounded-lg border border-gray-400 py-2 shadow-none focus:outline-none focus:border-light-blue-500 placeholder-gray-500;
 }
 
 input:invalid:focus {
@@ -44,7 +45,7 @@ th {
 }
 
 td {
-    @apply px-6 py-4 whitespace-nowrap border-b border-gray-500 text-sm leading-5;
+    @apply px-6 py-4 whitespace-nowrap border-b border-gray-300 text-sm leading-5;
 }
 
 @screen sm {
