@@ -43,6 +43,22 @@ class EventRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findOverlappingEvents($calendarId, $start, $end)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->join('e.calendar', 'c')
+            ->andWhere('c.id = :cid')
+            ->setParameter('cid', $calendarId)
+            ->where('e.start >= :start AND e.start < :end')
+            ->orWhere(':start >= e.start AND :start < e.end')
+            ->setParameters([
+                'start' => $start,
+                'end' => $end,
+            ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findUserFutureEvents($userId)
     {
         $qb = $this->createQueryBuilder('e')

@@ -129,3 +129,4 @@ Error: Erreur
 'Please enter a valid week.': 'Veuillez entrer une semaine valide.'
 'Your password should be at least {{ limit }} characters.': 'Votre mot de passe doit contenir au minimum {{ limit }} charactères.'
 'The password fields must match.': 'Les champs de mot de passe doivent correspondre.'
+'The event is overlapping with another on this calendar': 'Le rendez-vous chevauche un autre rendez-vous sur ce calendrier.'

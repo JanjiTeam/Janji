@@ -64,14 +64,14 @@ class AppointmentController extends AbstractController
         }
 
         $event = new Event();
+        $event->setCalendar($calendar);
+        $event->setUser($this->getUser());
 
         $form = $this->createForm(EventType::class, $event);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $event->setCalendar($calendar);
-            $event->setUser($this->getUser());
             $this->getDoctrine()->getManager()->persist($event);
             $this->getDoctrine()->getManager()->flush();
 

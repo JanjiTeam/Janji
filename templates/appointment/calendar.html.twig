@@ -22,12 +22,14 @@
                                 </div>
                             {% endfor %}
                         </div>
+                        <div class="form-errors">
+                            {{ form_errors(appointmentForm) }}
+                        </div>
                     </div>
                 <div id="appointment-display-block" class="mb-4">
                     <h3 class="mb-2">Votre rendez vous : </h3>
                     <p id="appointment-display" class="mb-4"></p>
                     {{ form_start(appointmentForm) }}
-                    {{ form_errors(appointmentForm) }}
                     <div class="hidden">
                         {{ form_row(appointmentForm.start) }}
                         {{ form_row(appointmentForm.end) }}

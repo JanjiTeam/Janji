@@ -48,6 +48,10 @@ td {
     @apply px-6 py-4 whitespace-nowrap border-b border-gray-300 text-sm leading-5;
 }
 
+.form-errors > ul {
+    @apply bg-red-200 px-6 py-4 mx-2 my-4 rounded-md flex items-center mx-auto;
+}
+
 @screen sm {
     label {
         @apply text-sm;
