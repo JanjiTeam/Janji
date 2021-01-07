@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto pt-4">
+        <h1>Suppression du compte</h1>
+        <p>
+            Pour valider la supression de votre compte, veuillez saisir votre mot de passe actuel.
+            Cela supprimera l'intégralité des informations de votre compte, de manière définitive.
+            Pour prendre à nouveau rendez-vous, il faudra creer un nouveau compte.
+        </p>
+        {{ form(deleteForm) }}
+    </div>
+{% endblock %}

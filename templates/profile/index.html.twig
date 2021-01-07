@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto pt-4">
+        <a href="{{ path('app_logout') }}" class="btn">{{ 'logout'|trans }}</a>
+        <a href="{{ path('delete_account') }}">{{ 'delete_account'|trans }}</a>
+        <div class="grid grid-cols-1 md:gap-12 md:grid-cols-2">
+            <div>
+                <h2 class="text-xl mb-2">Change personal informations</h2>
+                {{ form_start(userInformationForm) }}
+                <div class="flex flex-col mb-6">
+                    {{ form_label(userInformationForm.firstname, 'firstname') }}
+                    {{ form_widget(userInformationForm.firstname, {'attr': {'placeholder': 'firstname'}}) }}
+                </div>
+                <div class="flex flex-col mb-6">
+                    {{ form_label(userInformationForm.lastname, 'lastname') }}
+                    {{ form_widget(userInformationForm.lastname, {'attr': {'placeholder': 'lastname'}}) }}
+                </div>
+                <div class="flex flex-col mb-6">
+                    {{ form_label(userInformationForm.phone, 'phone') }}
+                    {{ form_widget(userInformationForm.phone, {'attr': {'placeholder': 'phone'}}) }}
+                </div>
+                <div class="flex justify-between items-center">
+                    <button class="btn">{{ button_label|default('save')|trans }}</button>
+                </div>
+                {{ form_end(userInformationForm) }}
+            </div>
+
+            <div>
+                <h2 class="text-xl mb-2">Change password</h2>
+                {{ form_start(changePasswordFrom) }}
+                {{ form_errors(changePasswordFrom) }}
+                <div class="flex flex-col mb-6">
+                    {{ form_label(changePasswordFrom.oldPassword, 'old_password') }}
+                    {{ form_widget(changePasswordFrom.oldPassword, {'attr': {'placeholder': 'old_password'}}) }}
+                    {{ form_errors(changePasswordFrom.oldPassword) }}
+                </div>
+
+                <div class="flex flex-col mb-6">
+                    {{ form_label(changePasswordFrom.plainPassword.first, 'password') }}
+                    {{ form_widget(changePasswordFrom.plainPassword.first, {'attr': {'placeholder': 'password', 'minlength': 6}}) }}
+                </div>
+
+                <div class="flex flex-col mb-6">
+                    {{ form_label(changePasswordFrom.plainPassword.second, 'repeat-password') }}
+                    {{ form_widget(changePasswordFrom.plainPassword.second, {'attr': {'placeholder': 'repeat-password', 'minlength': 6}}) }}
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button class="btn">{{ button_label|default('save')|trans }}</button>
+                </div>
+                {{ form_end(changePasswordFrom) }}
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
