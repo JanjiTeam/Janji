@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}{% endblock %}
+{% block flashes %}{% endblock %}
 
 {% block body %}
     <div class="min-h-screen flex flex-col items-center justify-center svg-background">
         <div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
-            {% block content %}{% endblock %}
+            {% block main %}
+                {% block heading %}{% endblock %}
+                {{ include('components/flash.html.twig') }}
+                {% block content %}{% endblock %}
+            {% endblock %}
         </div>
     </div>
 {% endblock %}

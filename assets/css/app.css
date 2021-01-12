@@ -52,6 +52,18 @@ td {
     @apply bg-red-200 px-6 py-4 mx-2 my-4 rounded-md flex items-center mx-auto;
 }
 
+.flash-notice {
+    @apply bg-green-200;
+}
+
+.flash-warning {
+    @apply bg-yellow-200;
+}
+
+.flash-error {
+    @apply bg-red-200;
+}
+
 @screen sm {
     label {
         @apply text-sm;

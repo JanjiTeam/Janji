@@ -1,0 +1,7 @@
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="w-full px-4 py-2 mb-4 rounded-lg text-xs flex items-center mx-auto flash-{{ label }}">
+            <span class="flash-text-{{ label }}">{{ message }}</span>
+        </div>
+    {% endfor %}
+{% endfor %}
