@@ -1,89 +1,89 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/full.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
 
-{% block header %}{% endblock %}
+{% block content %}
+    <h1 class="font-medium self-center text-xl sm:text-2xl text-gray-800 mb-6">{{ 'login-title'|trans }}</h1>
 
-{% block body %}
-    <div class="min-h-screen flex flex-col items-center justify-center svg-background">
-        <div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
-            <h1 class="font-medium self-center text-xl sm:text-2xl text-gray-800 mb-6">{{ 'login-title'|trans }}</h1>
-
-            <form method="post">
-                {% if error %}
-                    <div class="bg-red-200 px-4 py-2 mb-4 rounded-lg text-xs flex items-center mx-auto ">
-                        <svg
-                                viewBox="0 0 24 24"
-                                class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3"
-                        >
-                            <path
-                                    fill="currentColor"
-                                    d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z"
-                            ></path>
-                        </svg>
-                        <span class="text-red-800">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
-                    </div>
-                {% endif %}
-
-                <div class="flex flex-col mb-6">
-                    <label for="inputEmail">{{ 'email'|trans }}</label>
-                    <div class="relative">
-                        <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
-                            <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                <path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
-                            </svg>
-                        </div>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus
-                               class="pl-10 pr-4 w-full"
-                               placeholder="{{ 'email'|trans }}">
-                    </div>
-                </div>
-
-                <div class="flex flex-col mb-6">
-                    <label for="inputPassword">{{ 'password'|trans }}</label>
-                    <div class="relative">
-                        <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke-linecap="round"
-                                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
-                            </svg>
-                        </div>
-                        <input type="password" name="password" id="inputPassword"
-                               class="pl-10 pr-4 w-full"
-                               required placeholder="{{ 'password'|trans }}">
-                    </div>
-                </div>
-
-                <input type="hidden" name="_csrf_token"
-                       value="{{ csrf_token('authenticate') }}"
+    <form method="post">
+        {% if error %}
+            <div class="bg-red-200 px-4 py-2 mb-4 rounded-lg text-xs flex items-center mx-auto ">
+                <svg
+                        viewBox="0 0 24 24"
+                        class="text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3"
                 >
+                    <path
+                            fill="currentColor"
+                            d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z"
+                    ></path>
+                </svg>
+                <span class="text-red-800">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+            </div>
+        {% endif %}
 
-                {#
-                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                See https://symfony.com/doc/current/security/remember_me.html
-
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
-                    </label>
+        <div class="flex flex-col mb-6">
+            <label for="inputEmail">{{ 'email'|trans }}</label>
+            <div class="relative">
+                <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                    </svg>
                 </div>
-                #}
-
-                <div class="flex w-full">
-                    <button type="submit"
-                            class="flex items-center justify-center w-full">
-                        <span class="mr-2 uppercase">{{ 'login'|trans }}</span>
-                    </button>
-                </div>
-            </form>
-            <div class="flex justify-center items-center mt-6">
-                <a href="{{ path('app_register') }}"
-                   class="inline-flex items-center font-bold text-xs text-center">
-                    <span class="ml-2">{{ 'no-account' | trans }}</span>
-                </a>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus
+                       class="pl-10 pr-4 w-full"
+                       placeholder="{{ 'email'|trans }}">
             </div>
         </div>
+
+        <div class="flex flex-col mb-6">
+            <label for="inputPassword">{{ 'password'|trans }}</label>
+            <div class="relative">
+                <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                    </svg>
+                </div>
+                <input type="password" name="password" id="inputPassword"
+                       class="pl-10 pr-4 w-full"
+                       required placeholder="{{ 'password'|trans }}">
+            </div>
+        </div>
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
+        {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+        #}
+
+        <div class="flex w-full">
+            <button type="submit"
+                    class="flex items-center justify-center w-full">
+                <span class="mr-2 uppercase">{{ 'login'|trans }}</span>
+            </button>
+        </div>
+    </form>
+    <div class="flex justify-center items-center mt-6">
+        <a href="{{ path('app_register') }}"
+           class="inline-flex items-center font-bold text-xs text-center">
+            <span class="ml-2">{{ 'no-account' | trans }}</span>
+        </a>
+    </div>
+    <div class="flex justify-center items-center mt-6">
+        <a href="{{ path('app_forgot_password_request') }}"
+           class="inline-flex items-center font-bold text-xs text-center">
+            <span class="ml-2">{{ 'forget-password' | trans }}</span>
+        </a>
     </div>
 {% endblock %}
