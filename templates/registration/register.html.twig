@@ -23,6 +23,7 @@
     <div class="flex flex-col mb-6">
         {{ form_label(registrationForm.email, 'email') }}
         {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'email'}}) }}
+        {{ form_errors(registrationForm.email) }}
     </div>
 
     <div class="flex flex-col mb-6">

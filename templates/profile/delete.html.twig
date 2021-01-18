@@ -1,15 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}{{ 'delete_account_title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container mx-auto pt-4">
-        <h1>Suppression du compte</h1>
-        <p>
-            Pour valider la supression de votre compte, veuillez saisir votre mot de passe actuel.
-            Cela supprimera l'intégralité des informations de votre compte, de manière définitive.
-            Pour prendre à nouveau rendez-vous, il faudra creer un nouveau compte.
+        <h1 class="text-xl mb-2">{{ 'delete_account_title'|trans }}</h1>
+        <p class="mb-4">
+            {{ 'delete_account_infos'|trans }}
         </p>
-        {{ form(deleteForm) }}
+        {{ form_start(deleteForm) }}
+        <div class="flex flex-col mb-4">
+            {{ form_label(deleteForm.currentPassword, 'password') }}
+            {{ form_widget(deleteForm.currentPassword, {'attr': {'placeholder': 'password'}}) }}
+        </div>
+        <div class="flex justify-between items-center mb-4">
+            <a href="{{ path('profile') }}">{{ 'back'|trans }}</a>
+            {{ form_row(deleteForm.submit) }}
+        </div>
+        {{ form_end(deleteForm) }}
     </div>
 {% endblock %}

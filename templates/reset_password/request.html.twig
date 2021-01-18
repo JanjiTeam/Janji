@@ -1,9 +1,9 @@
 {% extends 'layout/full.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}{{ 'reset_password'|trans }}{% endblock %}
 
 {% block content %}
-    <h1 class="font-medium self-center text-xl sm:text-2xl text-gray-800 mb-6">Reset your password</h1>
+    <h1 class="font-medium self-center text-xl sm:text-2xl text-gray-800 mb-6">{{ 'reset_password'|trans }}</h1>
 
     {{ form_start(requestForm) }}
 
@@ -14,15 +14,20 @@
     </div>
     <div class="mb-4">
         <small>
-            Enter your email address and we we will send you a
-            link to reset your password.
+            {{ 'reset_password_description'|trans }}
         </small>
     </div>
     <div class="flex w-full">
         <button type="submit"
                 class="flex items-center justify-center w-full">
-            <span class="mr-2">Send password reset email</span>
+            <span class="mr-2">{{ 'submit'|trans }}</span>
         </button>
     </div>
     {{ form_end(requestForm) }}
+    <div class="flex justify-center items-center mt-6">
+        <a href="{{ path('app_login') }}"
+           class="inline-flex items-center font-bold text-xs text-center">
+            <span>{{ 'back' | trans }}</span>
+        </a>
+    </div>
 {% endblock %}

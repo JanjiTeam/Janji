@@ -4,11 +4,13 @@
 
 {% block body %}
     <div class="container mx-auto pt-4">
-        <a href="{{ path('app_logout') }}" class="btn">{{ 'logout'|trans }}</a>
-        <a href="{{ path('delete_account') }}">{{ 'delete_account'|trans }}</a>
-        <div class="grid grid-cols-1 md:gap-12 md:grid-cols-2">
+        <div class="mb-4">
+            <a href="{{ path('app_logout') }}" class="btn">{{ 'logout'|trans }}</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:gap-12 md:grid-cols-2 mb-4">
             <div>
-                <h2 class="text-xl mb-2">Change personal informations</h2>
+                <h2 class="text-xl mb-2">{{ 'edit_personal_infos'|trans }}</h2>
                 {{ form_start(userInformationForm) }}
                 <div class="flex flex-col mb-6">
                     {{ form_label(userInformationForm.firstname, 'firstname') }}
@@ -29,7 +31,7 @@
             </div>
 
             <div>
-                <h2 class="text-xl mb-2">Change password</h2>
+                <h2 class="text-xl mb-2">{{ 'edit_password'|trans }}</h2>
                 {{ form_start(changePasswordFrom) }}
                 {{ form_errors(changePasswordFrom) }}
                 <div class="flex flex-col mb-6">
@@ -54,6 +56,7 @@
                 {{ form_end(changePasswordFrom) }}
             </div>
         </div>
+        <a href="{{ path('delete_account') }}">{{ 'delete_account'|trans }}</a>
 
 
     </div>

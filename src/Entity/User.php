@@ -43,12 +43,12 @@ class User implements UserInterface
     private ?string $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="owner")
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="owner", orphanRemoval=true)
      */
     private Collection $calendars;
 
     /**
-     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="user", orphanRemoval=true)
      */
     private Collection $events;
 

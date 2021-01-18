@@ -15,7 +15,9 @@ class CurrentPasswordType extends AbstractType
     {
         $builder
             ->add('currentPassword', PasswordType::class)
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'submit',
+            ])
         ;
     }
 
