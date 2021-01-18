@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AppointmentController!{% endblock %}
+{% block title %}{{ 'calendar_slot'|trans }} - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -13,12 +13,12 @@
             <div id="calendar" class="w-2/3"></div>
             <aside class="w-1/3 pl-4">
                     <div id="drag-events-wrapper" class="mb-4">
-                        <p class="mb-4">Faites glisser un créneau sur le calendrier</p>
+                        <p class="mb-4">{{ 'calendar_drag'|trans }}</p>
                         <div class="flex space-x-4">
                             {% for eventType in calendar.eventTypes %}
                                 <div class="drag-event w-1/3 rounded bg-blue-500 p-2 cursor-move" data-duration="{{ eventType.duration }}">
                                     <span>{{ eventType.title }}</span><br>
-                                    <span>Durée : {{ eventType.duration }} min</span>
+                                    <span>{{ 'duration'|trans }} : {{ eventType.duration }} {{ 'min'|trans }}</span>
                                 </div>
                             {% endfor %}
                         </div>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 <div id="appointment-display-block" class="mb-4">
-                    <h3 class="mb-2">Votre rendez vous : </h3>
+                    <h3 class="mb-2">{{ 'your_event'|trans }}</h3>
                     <p id="appointment-display" class="mb-4"></p>
                     {{ form_start(appointmentForm) }}
                     <div class="hidden">
@@ -42,7 +42,7 @@
                 </div>
                 {% if futureEvents | length > 0 %}
                 <div>
-                    <h3>Vos rendez-vous à venir : </h3>
+                    <h3>{{ 'future_events'|trans }}</h3>
                     <ul>
                         {% for event in futureEvents %}
                             <li data-id="{{ event.id }}">{{ event.start|date }} - {{ event.end|date }}</li>

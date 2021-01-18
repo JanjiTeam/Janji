@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AppointmentController!{% endblock %}
+{% block title %}{{ 'choose_pro'|trans }} - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,13 +10,13 @@
 {% block body %}
     <div>
         <form id="selectProForm">
-            <label for="selectPros">Selectionnez votre pro</label>
+            <label for="selectPros">{{ 'choose_pro'|trans }}</label>
             <select id="selectPros">
                 {% for pro in pros %}
                     <option value="{{ pro.id }}">{{ pro.email }}</option>
                 {% endfor %}
             </select>
-            <button type="submit">Suivant</button>
+            <button type="submit">{{ 'next'|trans }}</button>
         </form>
     </div>
 {% endblock %}
