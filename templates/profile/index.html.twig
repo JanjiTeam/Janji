@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}{{ 'profile'|trans }} - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container mx-auto pt-4">
