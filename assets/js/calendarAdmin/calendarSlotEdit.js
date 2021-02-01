@@ -1,13 +1,10 @@
 import { Calendar } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-
-import frLocale from '@fullcalendar/core/locales/fr';
 
 import { formatISO, addMinutes } from 'date-fns';
 
 import Swal from 'sweetalert2';
+
+import baseOptions from './baseCalendar';
 
 import '../../css/calendar.css';
 
@@ -65,29 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const calendarEl = document.getElementById('calendar');
 
     const calendar = new Calendar(calendarEl, {
+        ...baseOptions,
         eventSources: [
             {
                 // eslint-disable-next-line no-undef
                 url: `/calendar/${calendarId}/slots`,
             },
         ],
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek',
-        },
-        locale: frLocale,
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        initialView: 'timeGridWeek',
-        displayEventEnd: true,
-        editable: true,
-        nowIndicator: true,
-        eventClassNames: (arg) => {
-            if (arg.event.extendedProps.user !== null) {
-                return ['assigned-event'];
-            }
-            return ['free-event'];
-        },
         eventDrop: async (info) => {
             let eventId = info.event.id;
 

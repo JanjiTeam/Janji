@@ -16,9 +16,9 @@ Encore
     .addEntry('appointment', './assets/js/appointment.js')
     .addEntry('register', './assets/js/register.js')
 
-    .copyFiles({
+/*    .copyFiles({
         from: './assets/images',
-    })
+    }) */
 
     .splitEntryChunks()
 
