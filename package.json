@@ -1,7 +1,6 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^1.0.3",
-        "autoprefixer": "^10.2.4",
         "core-js": "^3.8.3",
         "eslint": "^7.19.0",
         "eslint-config-airbnb-base": "^14.2.1",
@@ -38,6 +37,7 @@
         "date-fns": "^2.16.1",
         "flatpickr": "^4.6.9",
         "sweetalert2": "^10.14.0",
-        "tailwindcss": "^2.0.2"
+        "tailwindcss": "^2.0.2",
+        "autoprefixer": "^10.2.4"
     }
 }
