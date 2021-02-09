@@ -27,6 +27,9 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
+    .enableBuildCache({
+        config: [__filename],
+    })
 
     /* eslint-disable no-param-reassign */
     .configureBabelPresetEnv((config) => {
