@@ -46,11 +46,13 @@
                 <div class="flex flex-col mb-6">
                     {{ form_label(changePasswordFrom.plainPassword.first, 'password') }}
                     {{ form_widget(changePasswordFrom.plainPassword.first, {'attr': {'placeholder': 'password', 'minlength': 6}}) }}
+                    {{ form_errors(changePasswordFrom.plainPassword.first) }}
                 </div>
 
                 <div class="flex flex-col mb-6">
                     {{ form_label(changePasswordFrom.plainPassword.second, 'repeat-password') }}
                     {{ form_widget(changePasswordFrom.plainPassword.second, {'attr': {'placeholder': 'repeat-password', 'minlength': 6}}) }}
+                    {{ form_errors(changePasswordFrom.plainPassword.second) }}
                 </div>
 
                 <div class="flex justify-between items-center">
