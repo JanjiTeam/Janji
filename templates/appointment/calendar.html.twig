@@ -8,15 +8,14 @@
 {% endblock %}
 
 {% block body %}
-    <div class="w-full px-4">
-        <div class="p-4 text-gray-900 bg-white rounded-lg shadow-lg text-center flex">
-            <div id="calendar" class="w-2/3"></div>
-            <aside class="w-1/3 pl-4">
+    <div class="w-full px-4 calendar-wrapper">
+        <div class="p-4 text-gray-900 bg-white rounded-lg shadow-lg text-center flex flex-col lg:flex-row h-full">
+            <aside class="w-full lg:pl-4 lg:w-1/3 lg:order-last">
                     <div id="drag-events-wrapper" class="mb-4">
                         <p class="mb-4">{{ 'calendar_drag'|trans }}</p>
-                        <div class="flex space-x-4">
+                        <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-2">
                             {% for eventType in calendar.eventTypes %}
-                                <div class="drag-event w-1/3 rounded bg-blue-500 p-2 cursor-move" data-duration="{{ eventType.duration }}">
+                                <div class="drag-event rounded bg-light-blue-500 p-2 cursor-move text-white" data-duration="{{ eventType.duration }}">
                                     <span>{{ eventType.title }}</span><br>
                                     <span>{{ 'duration'|trans }} : {{ eventType.duration }} {{ 'min'|trans }}</span>
                                 </div>
@@ -26,7 +25,7 @@
                             {{ form_errors(appointmentForm) }}
                         </div>
                     </div>
-                <div id="appointment-display-block" class="mb-4">
+                <div id="appointment-display-block" class="mb-4 hidden">
                     <h3 class="mb-2">{{ 'your_event'|trans }}</h3>
                     <p id="appointment-display" class="mb-4"></p>
                     {{ form_start(appointmentForm) }}
@@ -51,6 +50,7 @@
                 </div>
                 {% endif %}
             </aside>
+            <div id="calendar" class="w-full lg:w-2/3"></div>
         </div>
 
     </div>

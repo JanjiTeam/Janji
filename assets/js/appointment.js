@@ -13,7 +13,6 @@ import '../css/calendar.css';
 
 let selectedEvent = null;
 const appointmentDisplayBlockEl = document.getElementById('appointment-display-block');
-appointmentDisplayBlockEl.classList.add('hidden');
 
 const draggableEl = document.getElementById('drag-events-wrapper');
 
@@ -42,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         eventData: (eventEl) => ({
             duration: { minutes: eventEl.dataset.duration },
             constraint: 'slot',
+            color: 'var(--light-blue)',
         }),
     });
 
@@ -66,10 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventDataTransform: (eventData) => ({ ...eventData, groupId: 'slot' }),
             },
         ],
+        height: '100%',
+        slotMinTime: '06:00:00',
+        slotMaxTime: '21:00:00',
         headerToolbar: {
             left: 'prev,next today',
-            center: 'title',
-            right: 'timeGridWeek',
+            center: '',
+            right: 'title',
         },
         locale: frLocale,
         plugins: [timeGridPlugin, interactionPlugin],

@@ -1,3 +1,16 @@
+html,
+body {
+    @apply h-full;
+}
+
+body {
+    @apply flex flex-col;
+}
+
+.calendar-wrapper {
+    flex: 1 1 auto;
+}
+
 .assigned-event {
     @apply bg-red-500 border-red-500;
 }
