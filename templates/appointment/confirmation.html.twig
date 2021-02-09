@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Confirmation de votre rendez-vous{% endblock %}
+{% block title %}Confirmation de votre rendez-vous - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container mx-auto pt-4">
@@ -12,6 +12,9 @@
             </div>
             <h2 class="text-4xl mb-6">Rendez-vous confirmé !</h2>
             <p class="mb-4">Nous avons bien pris en compte votre demande de rendez-vous.</p>
+
+            <p class="mb-6">Votre rendez-vous est prevu pour le : <strong>{{ event.start | date }}</strong></p>
+
             <a href="{{ path('home') }}" class="btn">Retour à l'accueil</a>
         </div>
     </div>

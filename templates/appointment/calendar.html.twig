@@ -17,7 +17,7 @@
                             {% for eventType in calendar.eventTypes %}
                                 <div class="drag-event rounded bg-light-blue-500 p-2 cursor-move text-white" data-duration="{{ eventType.duration }}">
                                     <span>{{ eventType.title }}</span><br>
-                                    <span>{{ 'duration'|trans }} : {{ eventType.duration }} {{ 'min'|trans }}</span>
+                                    <span>{{ 'duration'|trans }} : <time datetime="{{ eventType.duration }}m">{{ eventType.duration }}</time> {{ 'min'|trans }}</span>
                                 </div>
                             {% endfor %}
                         </div>
@@ -40,11 +40,14 @@
                     <hr class="mt-4">
                 </div>
                 {% if futureEvents | length > 0 %}
+                <hr class="my-4">
                 <div>
-                    <h3>{{ 'future_events'|trans }}</h3>
-                    <ul>
+                    <h3 class="mb-2">{{ 'future_events'|trans }}</h3>
+                    <ul class="space-y-2">
                         {% for event in futureEvents %}
-                            <li data-id="{{ event.id }}">{{ event.start|date }} - {{ event.end|date }}</li>
+                            <li data-id="{{ event.id }}" class="border rounded p-2">
+                                <time datetime="{{ event.start|date('c') }}">{{ event.start|date }}</time> - <time datetime="{{ event.end|date('c') }}">{{ event.end|date }}</time>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>

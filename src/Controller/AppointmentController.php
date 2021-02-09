@@ -75,7 +75,7 @@ class AppointmentController extends AbstractController
             $this->getDoctrine()->getManager()->persist($event);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('appointment_confirmation');
+            return $this->redirectToRoute('appointment_confirmation', ['id' => $event->getId()]);
         }
 
         $futureEvents = $this->getDoctrine()->getRepository(Event::class)->findUserFutureEvents($this->getUser()->getId());
@@ -88,10 +88,12 @@ class AppointmentController extends AbstractController
     }
 
     /**
-     * @Route("/confirm", name="appointment_confirmation", methods={"GET"})
+     * @Route("/confirm/{id}", name="appointment_confirmation", methods={"GET"})
      */
-    public function appointmentConfirmation()
+    public function appointmentConfirmation(Event $event)
     {
-        return $this->render('appointment/confirmation.html.twig');
+        return $this->render('appointment/confirmation.html.twig', [
+            'event' => $event,
+        ]);
     }
 }
