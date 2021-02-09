@@ -1,0 +1,23 @@
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        {% if compound %}
+            {# ... display the global form errors #}
+            <ul>
+                {% for error in errors %}
+                    <li class="text-red-500">
+                        <small>{{ error.message }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {# ... display the errors for a single field #}
+            <ul>
+                {% for error in errors %}
+                    <li class="text-red-500">
+                        <small>{{ error.message }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock form_errors %}

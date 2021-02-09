@@ -14,14 +14,17 @@
                 {{ form_start(userInformationForm) }}
                 <div class="flex flex-col mb-6">
                     {{ form_label(userInformationForm.firstname, 'firstname') }}
+                    {{ form_errors(userInformationForm.firstname) }}
                     {{ form_widget(userInformationForm.firstname, {'attr': {'placeholder': 'firstname'}}) }}
                 </div>
                 <div class="flex flex-col mb-6">
                     {{ form_label(userInformationForm.lastname, 'lastname') }}
+                    {{ form_errors(userInformationForm.lastname) }}
                     {{ form_widget(userInformationForm.lastname, {'attr': {'placeholder': 'lastname'}}) }}
                 </div>
                 <div class="flex flex-col mb-6">
                     {{ form_label(userInformationForm.phone, 'phone') }}
+                    {{ form_errors(userInformationForm.phone) }}
                     {{ form_widget(userInformationForm.phone, {'attr': {'placeholder': 'phone'}}) }}
                 </div>
                 <div class="flex justify-between items-center">

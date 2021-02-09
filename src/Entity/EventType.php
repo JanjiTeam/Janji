@@ -6,6 +6,7 @@ use App\Repository\EventTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EventTypeRepository::class)
@@ -31,6 +32,10 @@ class EventType
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *     min = 0,
+     *     max = 1440
+     * )
      */
     private $duration;
 

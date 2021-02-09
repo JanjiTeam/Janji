@@ -7,6 +7,7 @@ use App\Entity\EventType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
@@ -24,7 +25,9 @@ class EventTypeType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('duration')
+            ->add('duration', IntegerType::class, [
+                'help' => 'duration_in_minutes',
+            ])
             ->add('calendar', EntityType::class, [
                 'class' => Calendar::class,
                 'query_builder' => function (EntityRepository $er) {

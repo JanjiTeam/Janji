@@ -1,14 +1,19 @@
 {{ form_start(form) }}
+
 <div class="flex flex-col mb-6">
     {{ form_label(form.title, 'title') }}
+    {{ form_errors(form.title) }}
     {{ form_widget(form.title, {'attr': {'placeholder': 'title'}}) }}
 </div>
 <div class="flex flex-col mb-6">
     {{ form_label(form.duration, 'duration') }}
+    {{ form_errors(form.duration) }}
     {{ form_widget(form.duration, {'attr': {'placeholder': 'duration'}}) }}
+    <small class="mt-1 text-gray-400">{{ form_help(form.duration) }}</small>
 </div>
 <div class="flex flex-col mb-6">
     {{ form_label(form.calendar, 'calendar') }}
+    {{ form_errors(form.calendar) }}
     {{ form_widget(form.calendar, {'attr': {'placeholder': 'calendar'}}) }}
 </div>
 <div class="flex justify-between items-center">
