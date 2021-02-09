@@ -8,15 +8,23 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        <form id="selectProForm">
-            <label for="selectPros">{{ 'choose_pro'|trans }}</label>
-            <select id="selectPros">
+    <div class="container w-full px-4 mx-auto md:w-1/2">
+        <h2 class="mb-4 text-center text-2xl">{{ 'choose_pro'|trans }}</h2>
+        <form id="selectProForm" novalidate>
+            <div class="mb-4">
                 {% for pro in pros %}
-                    <option value="{{ pro.id }}">{{ pro.email }}</option>
+                    <div>
+                        <input type="radio" id="pro-{{ pro.id }}" name="pro" value="{{ pro.id }}" class="hidden" required>
+                        <label for="pro-{{ pro.id }}" class="flex items-center border rounded p-2 cursor-pointer hover:text-light-blue-500">
+                            {{ pro.email }}
+                            <span class="w-4 h-4 inline-block mr-1 rounded-full border border-grey ml-auto"></span>
+                        </label>
+                    </div>
                 {% endfor %}
-            </select>
-            <button type="submit">{{ 'next'|trans }}</button>
+            </div>
+            <div class="flex">
+                <button type="submit" class="ml-auto">{{ 'next'|trans }}</button>
+            </div>
         </form>
     </div>
 {% endblock %}
@@ -29,8 +37,12 @@
         if (selectProForm) {
             selectProForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const selectedPro = e.target.querySelector('#selectPros').value;
-                window.location.href = `/appointment/pro/${selectedPro}`;
+                const selectedInput = e.target.querySelector('input[name="pro"]:checked');
+                if(selectedInput) {
+                    const selectedPro = selectedInput.value;
+                    window.location.href = `/appointment/pro/${selectedPro}`;
+                }
+
             });
         }
     </script>

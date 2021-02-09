@@ -64,6 +64,16 @@ td {
     @apply bg-red-200;
 }
 
+input[type="radio"]:checked + label {
+    @apply text-light-blue-500 border-2 border-light-blue-500;
+}
+
+input[type="radio"]:checked + label span {
+    @apply bg-light-blue-500;
+
+    box-shadow: 0 0 0 2px white inset;
+}
+
 @screen sm {
     label {
         @apply text-sm;
