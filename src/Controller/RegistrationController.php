@@ -32,6 +32,10 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            if ($form->get('isPro')) {
+                $user->setRoles(['ROLE_PRO']);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

@@ -51,6 +51,11 @@
     </div>
 
     <div class="flex items-center mb-6">
+        {{ form_widget(registrationForm.isPro, {'attr': {'class': 'form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out'}}) }}
+        {{ form_label(registrationForm.isPro, 'iam-pro', {'label_attr': {'class': 'ml-2'}}) }}
+    </div>
+
+    <div class="flex items-center mb-6">
         {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out'}}) }}
         {{ form_label(registrationForm.agreeTerms, 'agree-terms', {'label_attr': {'class': 'ml-2'}}) }}
     </div>
