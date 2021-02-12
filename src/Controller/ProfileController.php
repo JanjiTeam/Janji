@@ -63,6 +63,8 @@ class ProfileController extends AbstractController
         if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $user = $this->getUser();
             if ($user) {
+                $this->get('security.token_storage')->setToken(null);
+
                 $this->getDoctrine()->getManager()->remove($user);
                 $this->getDoctrine()->getManager()->flush();
 
