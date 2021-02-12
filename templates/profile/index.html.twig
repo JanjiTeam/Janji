@@ -8,6 +8,10 @@
             <a href="{{ path('app_logout') }}" class="btn">{{ 'logout'|trans }}</a>
         </div>
 
+        {% block flashes %}
+            {{ include('components/flash.html.twig') }}
+        {% endblock %}
+
         <div class="grid grid-cols-1 md:gap-12 md:grid-cols-2 mb-4">
             <div>
                 <h2 class="text-xl mb-2">{{ 'edit_personal_infos'|trans }}</h2>

@@ -44,6 +44,7 @@ class ProfileController extends AbstractController
             );
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('notice', 'change_password_success');
         }
 
         return $this->render('profile/index.html.twig', [
