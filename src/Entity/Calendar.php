@@ -41,7 +41,7 @@ class Calendar
     private $slots;
 
     /**
-     * @ORM\OneToMany(targetEntity=EventType::class, mappedBy="calendar")
+     * @ORM\OneToMany(targetEntity=EventType::class, mappedBy="calendar", orphanRemoval=true)
      */
     private $eventTypes;
 
