@@ -70,7 +70,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $enabled = false;
+    private bool $enabled = true;
 
     /**
      * @ORM\OneToMany(targetEntity=Company::class, mappedBy="owner", orphanRemoval=true)
